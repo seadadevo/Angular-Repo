@@ -1,0 +1,18 @@
+<div class="course-card rounded text-center">
+  <div class="fw-bold p-2 course-title">{{index}}: {{course.description}}</div>
+  @if(course.imageUrl) {
+    <img
+      [src]="course.imageUrl"
+      width="200"
+      alt="Angular Course"
+      loading="lazy"
+    />
+  } @else {
+    <h4>No Image Availabe</h4>
+  }
+  <div class="course-description p-2 text-start">
+   {{course.longDescription}}
+  </div>
+  <button class="btn btn-primary" (click)="viewCourse()">view course</button>
+  <button class="btn btn-primary" (click)="logout()">Logout</button>
+</div>
