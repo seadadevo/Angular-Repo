@@ -23,5 +23,10 @@ import { MainComponent } from './main/main.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  isSidebarCollapsed = false;
+
+  toggleSideNav(){
+    this.isSidebarCollapsed = !this.isSidebarCollapsed;
+  }
 
 }

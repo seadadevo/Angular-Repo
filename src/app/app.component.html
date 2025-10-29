@@ -1,2 +1,5 @@
-<app-left-sidebar/>
-<app-main/>
+<app-left-sidebar 
+[collapsed]="isSidebarCollapsed"
+(onToggle)="toggleSideNav()"
+/>
+<app-main [collapsed]="isSidebarCollapsed"/>
