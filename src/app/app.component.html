@@ -1,14 +1,2 @@
-<div class="container-fluid">
-  <h1>{{courses[0].description}}</h1>
-  <div class="row mt-2">
-    @for(course of courses; track trackCourse; let index = $index; let count = $count;) {
-      Courses Count: {{count}}
-      <div class="col-md-4 col-12">
-        <app-course-card (onLogOut)="handleLogout()" [index]="index" (enrolled)="oncCourseEnrolled($event)" [course]="course"/>
-      </div>
-    }
-  </div>
-</div>
-
-<!-- <app-left-sidebar/>
-<app-main/> -->
+<app-left-sidebar/>
+<app-main/>
