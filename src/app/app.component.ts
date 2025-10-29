@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CourseCardComponent } from './course-card/course-card.component';
 import { ICourse } from './app.component.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -11,24 +12,23 @@ import { ICourse } from './app.component.model';
     RouterOutlet,
     HomeComponent,
     CourseCardComponent,
-  
+    CommonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
   data = {
-    title: 'angular-complete-guide',
+    coursename: 'angular-complete-guide',
   };
 
   onLogoClicked(): void {
     alert('Hello world');
   }
 
-  onkeyUp(title: string): void {
-    this.data.title = title;
-  }
+  date = new Date()
 
+  percent = 20
   readonly courses: Array<ICourse> = [
     {
       id: 1,

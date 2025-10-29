@@ -7,6 +7,13 @@
         <app-course-card (onLogOut)="handleLogout()" [index]="index" (enrolled)="oncCourseEnrolled($event)" [course]="course"/>
       </div>
     }
+
+
+    <h4>{{data.coursename | lowercase}}</h4>
+    <h4>{{data.coursename | uppercase}}</h4>
+    <h4>{{data.coursename | titlecase}}</h4>
+    <h4>{{date | date: "MM-dd-yyyy"}}</h4>
+    <h4>{{percent | percent}}</h4>
   </div>
 </div>
 
