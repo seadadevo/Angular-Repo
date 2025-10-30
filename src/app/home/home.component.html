@@ -1,1 +1,7 @@
-<p>home works!</p>
+<h2>Name: {{userName}}</h2>
+<!-- <h2 [style.backgroundColor] = "userAge > 20 ? 'red' : 'blue'">Age: {{userAge}}</h2> -->
+<h2 [style] = "toggleTheme ? lightTheme : darkTheme">Age: {{userAge}}</h2>
+<h2 [ngStyle] = "{'background-color': userAge > 10 ? 'red': 'green'}">Age: {{userAge}}</h2>
+<img [width]="imgWidth" [src]="imgSrc" alt="ahmed" [ngClass]="{'center': userAge > 10}">
+<input (keyup.w)="welcome($event)" type="text">
+<button (click)="changeToggleTheme()">change</button>

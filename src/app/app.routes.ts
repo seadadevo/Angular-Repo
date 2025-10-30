@@ -1,13 +1,18 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProductsComponent } from './products/products.component';
-import { SettingsComponent } from './settings/settings.component';
-import { PagesComponent } from './pages/pages.component';
+import { HomeComponent } from './home/home.component';
+import { ContactComponent } from './contact/contact.component';
+import { AboutComponent } from './about/about.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { WebComponent } from './web/web.component';
+import { MobileComponent } from './mobile/mobile.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'dashboard', pathMatch: "full"},
-    {path: 'dashboard',  component: DashboardComponent },
-    {path: 'products',  component: ProductsComponent},
-    {path: 'settings',  component: SettingsComponent},
-    {path: 'pages',  component: PagesComponent},
+    {path: '', redirectTo:'home', pathMatch: "full"},
+    {path:'home',component: HomeComponent},
+    {path:'contact',component: ContactComponent, children:[
+        {path: '', component: WebComponent},
+        {path: 'mobile', component: MobileComponent}
+    ]},
+    {path:'about',component: AboutComponent},
+    {path:'**',component: NotfoundComponent},
 ];
