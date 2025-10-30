@@ -5,3 +5,4 @@
 <img [width]="imgWidth" [src]="imgSrc" alt="ahmed" [ngClass]="{'center': userAge > 10}">
 <input (keyup.w)="welcome($event)" type="text">
 <button (click)="changeToggleTheme()">change</button>
+<app-child [userNameFromParent]="userName"></app-child>

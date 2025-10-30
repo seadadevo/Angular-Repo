@@ -1,10 +1,11 @@
 import { CommonModule, NgStyle } from '@angular/common';
 import { Component } from '@angular/core';
+import { ChildComponent } from '../child/child.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ChildComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -24,7 +25,9 @@ export class HomeComponent {
   imgWidth: number = 150;
   lightTheme: string = "background-color: red; color: black;font-size: 20px;"
   darkTheme: string = "background-color: blue; color: white;font-size: 40px;"
- 
+  
+  friends: string[] = ['ahmed', 'ali', 'khaled', 'ismail'];
+
   
 
 }
