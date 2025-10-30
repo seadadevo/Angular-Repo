@@ -14,10 +14,10 @@ import { UsersService } from '../users.service';
 })
 export class HomeComponent {
 
-constructor() {
-  let myServices = new UsersService();
-  this.homeUsers = myServices.users;
-  myServices.welcome()
+constructor(obj:UsersService) {
+  // let myServices = new UsersService();
+  this.homeUsers = obj.users;
+  obj.welcome()
 }
 
 homeUsers:User[] = [];

@@ -13,8 +13,8 @@ import { User } from '../models/user';
 })
 export class ContactComponent {
   galleryUsers: User[] = []
-  constructor() {
-    let _UserServices = new UsersService()
-    this.galleryUsers = _UserServices.users;
+  constructor(obj: UsersService) {
+    // let _UserServices = new UsersService()
+    this.galleryUsers = obj.users;
   }
 }
