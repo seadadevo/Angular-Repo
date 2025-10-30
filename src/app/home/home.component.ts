@@ -28,6 +28,8 @@ export class HomeComponent {
   
   friends: string[] = ['ahmed', 'ali', 'khaled', 'ismail'];
 
-  
+  changeName() {
+    this.userName = `x+${Math.random()}`
+  }
 
 }

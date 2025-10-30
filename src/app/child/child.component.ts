@@ -1,4 +1,4 @@
-import { Component, Input, input } from '@angular/core';
+import { Component, Input, input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -7,6 +7,20 @@ import { Component, Input, input } from '@angular/core';
   templateUrl: './child.component.html',
   styleUrl: './child.component.scss'
 })
-export class ChildComponent {
+export class ChildComponent implements OnChanges, OnInit, OnDestroy {
   @Input() userNameFromParent: string = '';
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('called')
+  }
+
+  ngOnInit(): void {
+    console.log('no on init craeted')
+  }
+
+  ngOnDestroy(): void {
+    console.log('destroied')
+  }
+  
+  
 }
