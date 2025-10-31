@@ -1,41 +1,37 @@
-<!-- <h2>Name: {{userName}}</h2> -->
-<!-- <h2 [style.backgroundColor] = "userAge > 20 ? 'red' : 'blue'">Age: {{userAge}}</h2> -->
-<!-- <h2 [style] = "toggleTheme ? lightTheme : darkTheme">Age: {{userAge}}</h2>
-<h2 [ngStyle] = "{'background-color': userAge > 10 ? 'red': 'green'}">Age: {{userAge}}</h2>
-<img [width]="imgWidth" [src]="imgSrc" alt="ahmed" [ngClass]="{'center': userAge > 10}">
-<input (keyup.w)="welcome($event)" type="text">
-<button (click)="changeToggleTheme()">change</button>
-<app-child [userNameFromParent]="userName"></app-child>
+<div class="movies-container p-5">
+  <h2 class="section-title mb-4">🔥 Trending Movies</h2>
 
-<button (click)="changeName()"></button> -->
-
-<h2>Home component</h2>
-<app-child [userNameFromParent]="userName"></app-child>
-
-<button (click)="changeName()">change</button>
-
-<table class="styled-table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Salary</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for(user of homeUsers; track $index;) {
-            <tr>
-                <td>{{user.name}}</td>
-                <td>{{user.age}}</td>
-                <td>{{user.gender}}</td>
-                <td>{{user.salary}}</td>
-            </tr>
-           } @empty {
-                <tr>
-                    <td colspan="4">No users found</td>
-                </tr>
-            }
-        
-    </tbody>
-</table>
+  <div class="movies-grid">
+    @for (movie of tredingMovies; track $index) {
+    <div class="movie-card">
+      <div class="poster-wrapper">
+        <img
+          [src]="imgPrefix + movie.poster_path"
+          [alt]="movie.title"
+          class="movie-poster"
+        />
+        <div class="overlay">
+          <p class="movie-overview">
+            {{
+              movie.overview.length > 100
+                ? (movie.overview | slice : 0 : 100) + "..."
+                : movie.overview
+            }}
+          </p>
+          <div class="footer-card">
+            <button class="details-btn">View Details</button>
+            <p
+              [ngStyle]="{
+                'background-color': movie.vote_average > 5 ? 'green' : 'red'
+              }"
+            >
+              {{ movie.vote_average | number:'1.1-1' }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <h5 class="movie-title mt-2">{{ movie.title }}</h5>
+    </div>
+    }
+  </div>
+</div>

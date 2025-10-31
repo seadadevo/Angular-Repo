@@ -8,7 +8,7 @@ import { Component, Input, input, OnChanges, OnDestroy, OnInit, SimpleChanges } 
   styleUrl: './child.component.scss'
 })
 export class ChildComponent implements OnChanges, OnInit, OnDestroy {
-  @Input() userNameFromParent: string = '';
+
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('called')

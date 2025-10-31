@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class UsersService {
 
-  constructor(private _HttpClient: HttpClient) { }
+  constructor() { }
 
   users:User[] = [
     {name: 'ahmed', age: 28, gender: 'male', salary: 2000},

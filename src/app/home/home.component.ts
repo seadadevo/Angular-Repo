@@ -3,45 +3,40 @@ import { Component } from '@angular/core';
 import { ChildComponent } from '../child/child.component';
 import { User } from '../models/user';
 import { UsersService } from '../users.service';
+import { Movie } from '../models/movie';
+import { MoviesService } from '../movies.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ChildComponent],
+  imports: [CommonModule, ChildComponent, HttpClientModule, NgStyle],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
+  styleUrls: ['./home.component.scss'],
   providers:[UsersService]
 })
 export class HomeComponent {
 
-constructor(obj:UsersService) {
-  // let myServices = new UsersService();
-  this.homeUsers = obj.users;
-  obj.welcome()
+constructor(myServices:UsersService, _MoviesService: MoviesService) {
+    this.homeUsers = myServices.users
+    _MoviesService.getTrendingMovies().subscribe({
+      next: (data) =>{
+        this.tredingMovies = data.results
+        console.log(this.tredingMovies)
+      },
+      error: (err) => this.errorMessage = err,
+      complete: () => console.log('complete')
+      
+    })
 }
 
 homeUsers:User[] = [];
-  
+    tredingMovies: any = []
+    errorMessage: string = '';
+    imgPrefix: string = 'https://image.tmdb.org/t/p/w500';
+    userName: string = ''
+    
 
-  welcome(e: Event) {
-    console.log(e)
-  }
 
-  changeToggleTheme() {
-    this.toggleTheme = !this.toggleTheme
-  }
-  toggleTheme: boolean = false;
-  userName: string = 'ahmed mohamed';
-  userAge: number = 23;
-  imgSrc: string = "assets/images/front.jpg";
-  imgWidth: number = 150;
-  lightTheme: string = "background-color: red; color: black;font-size: 20px;"
-  darkTheme: string = "background-color: blue; color: white;font-size: 40px;"
-  
-  friends: string[] = ['ahmed', 'ali', 'khaled', 'ismail'];
-
-  changeName() {
-    this.userName = `x+${Math.random()}`
-  }
 
 }
