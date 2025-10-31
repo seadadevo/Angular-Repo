@@ -16,15 +16,18 @@ import { HttpClientModule } from '@angular/common/http';
   providers:[UsersService]
 })
 export class HomeComponent {
-
+isLoading = true;
 constructor(myServices:UsersService, _MoviesService: MoviesService) {
     this.homeUsers = myServices.users
     _MoviesService.getTrendingMovies().subscribe({
       next: (data) =>{
         this.tredingMovies = data.results
-        console.log(this.tredingMovies)
+        this.isLoading = false;
       },
-      error: (err) => this.errorMessage = err,
+      error: (err) => {
+        this.errorMessage = err,
+        this.isLoading = false
+      },
       complete: () => console.log('complete')
       
     })

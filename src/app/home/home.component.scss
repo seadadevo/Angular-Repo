@@ -13,7 +13,12 @@
 .no-movies {
     text-align: center;
     padding: 10px;
-    
+
+}
+
+.error-message{
+    color: red;
+    font-size: 30px;
 }
 .movies-grid {
   display: grid;

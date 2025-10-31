@@ -1,9 +1,16 @@
 <div class="movies-container p-5">
   <h2 class="section-title mb-4">🔥 Trending Movies</h2>
 
-  @if(tredingMovies.length === 0) {
+  @if(errorMessage) {
+      <p class="error-message">{{ errorMessage }}</p>
+  }
+  @else if(isLoading) {
+  <p class="no-movies">⏳ Loading...</p>
+  }
+  @else if(!tredingMovies || tredingMovies.length === 0) {
   <p class="no-movies">No trending movies right now 🔍</p>
-}@else {
+}
+@else {
      <div class="movies-grid">
     @for (movie of tredingMovies; track $index) {
     <div class="movie-card">
@@ -43,7 +50,9 @@
           </div>
         </div>
       </div>
-      <h5 class="movie-title mt-2">{{ movie.title }}</h5>
+      <h5 class="movie-title mt-2">
+  {{ movie.title || 'Untitled Movie' }}
+</h5>
     </div>
     }
   </div>
