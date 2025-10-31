@@ -1,32 +1,45 @@
 <div class="movies-container p-5">
   <h2 class="section-title mb-4">🔥 Trending Movies</h2>
 
-  <div class="movies-grid">
+  @if(tredingMovies.length === 0) {
+  <p class="no-movies">No trending movies right now 🔍</p>
+}@else {
+     <div class="movies-grid">
     @for (movie of tredingMovies; track $index) {
     <div class="movie-card">
       <div class="poster-wrapper">
-        <img
-          [src]="imgPrefix + movie.poster_path"
-          [alt]="movie.title"
-          class="movie-poster"
-        />
+        @if(!movie.poster_path){
+            <div>No Poster Available</div>
+        } @else {
+            <img
+              [src]="imgPrefix + movie.poster_path"
+              [alt]="movie.title"
+              class="movie-poster"
+            />
+        }
         <div class="overlay">
-          <p class="movie-overview">
-            {{
-              movie.overview.length > 100
-                ? (movie.overview | slice : 0 : 100) + "..."
-                : movie.overview
-            }}
-          </p>
+            @if(movie.overview) {
+                <p class="movie-overview">
+                  {{
+                    movie.overview.length > 100
+                      ? (movie.overview | slice : 0 : 100) + "..."
+                      : movie.overview
+                  }}
+                </p>
+            } @else {
+                <p>No description available</p>
+            }
           <div class="footer-card">
             <button class="details-btn">View Details</button>
-            <p
-              [ngStyle]="{
-                'background-color': movie.vote_average > 5 ? 'green' : 'red'
-              }"
-            >
-              {{ movie.vote_average | number:'1.1-1' }}
-            </p>
+            @if(movie.vote_average) {
+                <p
+                  [ngStyle]="{
+                    'background-color': movie.vote_average > 5 ? 'green' : 'red'
+                  }"
+                >
+                  {{ movie.vote_average | number:'1.1-1' }}
+                </p>
+            }
           </div>
         </div>
       </div>
@@ -34,4 +47,6 @@
     </div>
     }
   </div>
+}
+ 
 </div>

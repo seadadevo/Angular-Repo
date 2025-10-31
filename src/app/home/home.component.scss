@@ -10,7 +10,11 @@
   text-align: center;
   letter-spacing: 1px;
 }
-
+.no-movies {
+    text-align: center;
+    padding: 10px;
+    
+}
 .movies-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
