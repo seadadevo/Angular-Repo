@@ -28,7 +28,7 @@ constructor(myServices:UsersService, _MoviesService: MoviesService) {
         this.errorMessage = err,
         this.isLoading = false
       },
-      complete: () => console.log('complete')
+      complete: () => console.log('completed')
       
     })
 }
