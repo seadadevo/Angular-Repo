@@ -25,7 +25,7 @@ import { RegisterComponent } from './register/register.component';
     RegisterComponent,
     CommonModule,
     RouterOutlet,
-    HttpClientModule   
+    HttpClientModule, 
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
