@@ -1,1 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+    --bg-main: #131722 ;
+    --light-bg: #24baef;
+    --transparent-bg:  rgba(36, 184, 239, 0.6);
+
+    --font-CoIor: #fff;
+    --second-FontCOIor: #949cb0;
+
+    --border-CoIor: #a8a8a83d;
+    --border-Height: 1px;
+}
+
+.bg-mine-light {
+    background-color: var(--light-bg);
+}
+
+body {
+    background-color: var(--bg-main);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--font-CoIor);
+}
+
+a, a:hover {
+    color: var(--font-CoIor);
+    text-decoration: noen;
+}
+
+.input-mine {
+    background-color: transparent;
+    color: var(--font-CoIor);
+    border: solid 1px var(--border-CoIor);
+}
+
