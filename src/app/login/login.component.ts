@@ -38,6 +38,8 @@ export class LoginComponent {
         next:(response)=>{
           this.isLoading = false;
           if(response.message === 'Login successful') {
+            localStorage.setItem('userToken', response.token)
+            this._AuthService.saveUserData()
             this._Router.navigate(['/home'])
             this.loginForm.reset();
           } 

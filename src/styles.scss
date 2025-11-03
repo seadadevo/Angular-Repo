@@ -5,10 +5,10 @@
     --light-bg: #24baef;
     --transparent-bg:  rgba(36, 184, 239, 0.6);
 
-    --font-CoIor: #fff;
-    --second-FontCOIor: #949cb0;
+    --font-Color: #fff;
+    --second-FontColor: #949cb0;
 
-    --border-CoIor: #a8a8a83d;
+    --border-Color: #a8a8a83d;
     --border-Height: 1px;
 }
 
@@ -19,17 +19,17 @@
 body {
     background-color: var(--bg-main);
     font-family: 'Montserrat', sans-serif;
-    color: var(--font-CoIor);
+    color: var(--font-Color);
 }
 
 a, a:hover {
-    color: var(--font-CoIor);
-    text-decoration: noen;
+    color: var(--font-Color);
+    text-decoration: none;
 }
 
 .input-mine {
     background-color: transparent;
-    color: var(--font-CoIor);
-    border: solid 1px var(--border-CoIor);
+    color: var(--font-Color);
+    border: solid 1px var(--border-Color);
 }
 

@@ -37,7 +37,6 @@ togglePasswordVisibility() {
 
   submitRegisterForm(registerForm:FormGroup) {
     this.isLoading = true;
-    console.log(registerForm.value)
     this._AuthService.signup(registerForm.value).subscribe({
       next:(response)=>{
         this.isLoading = false;
