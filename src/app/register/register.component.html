@@ -1,4 +1,7 @@
 <div class="w-75 mx-auto py-4">
+  @if(error){
+    <div class="alert alert-danger">{{error}}</div>
+  }
   <form
     (ngSubmit)="submitRegisterForm(registerForm)"
     [formGroup]="registerForm"
@@ -98,13 +101,22 @@
     </div>
     }
 
-    <label for="password">password</label>
-    <input
-      formControlName="password"
-      type="password"
-      class="form-control mb-2 input-mine"
-      name=""
-    />
+   <label for="password">password</label>
+<div class="position-relative">
+  <input
+    formControlName="password"
+    [type]="showPassword ? 'text' : 'password'"
+    class="form-control mb-2 input-mine pe-5"
+    id="password"
+  />
+  <i
+    class="fa"
+    [class.fa-eye]="!showPassword"
+    [class.fa-eye-slash]="showPassword"
+    (click)="togglePasswordVisibility()"
+    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
+  ></i>
+</div>
 
     @if(registerForm.get('password')?.errors &&
     registerForm.get('password')?.touched) {
@@ -121,6 +133,11 @@
     }
 
 
-    <button [disabled]="registerForm.invalid" type="submit" class="btn btn-info">Register</button>
+    <button [disabled]="registerForm.invalid" type="submit" class="btn btn-info">
+      <span>Register</span>
+      @if(isLoading) {
+        <i class="fas fa-spinner fa-spin"></i>
+      }
+    </button>
   </form>
 </div>
