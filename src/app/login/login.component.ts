@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     constructor(private _AuthService:AuthService, private _Router: Router) {
     }
   
@@ -58,6 +58,15 @@ export class LoginComponent {
     }
 
 
+    ngOnInit() {
+       this._AuthService.userData.subscribe({
+      next:() => {
+        if(this._AuthService.userData.getValue() != null) {
+          this._Router.navigate(['/home'])
+        }
+      }
+    })
+    }
    
 
 }
