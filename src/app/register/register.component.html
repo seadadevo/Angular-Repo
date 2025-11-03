@@ -1,142 +1,57 @@
 <div class="w-75 mx-auto py-4">
-  @if(error){
-    <div class="alert alert-danger">{{error}}</div>
+  @if (error) {
+  <div class="alert alert-danger">{{ error }}</div>
   }
+
   <form
     (ngSubmit)="submitRegisterForm(registerForm)"
     [formGroup]="registerForm"
   >
-    <label for="first_name">first name</label>
-    <input
-      formControlName="first_name"
-      type="text"
-      class="form-control mb-2 input-mine"
-      name=""
-    />
-    @if(registerForm.get('first_name')?.errors &&
-    registerForm.get('first_name')?.touched) {
-    <div class="alert alert-danger">
-      @switch (true) { @case
-      (registerForm.get('first_name')?.hasError('required')) {
-      <p class="m-0">First name is required</p>
-      } @case (registerForm.get('first_name')?.hasError('minlength')) {
-      <p class="m-0">First name is too short</p>
-      } @case (registerForm.get('first_name')?.hasError('maxlength')) {
-      <p class="m-0">First name is too long</p>
-      } @default {
-      <p class="m-0">Invalid input</p>
-      } }
-    </div>
-    }
-    <label for="last_name">last name</label>
-    <input
-      formControlName="last_name"
-      type="text"
-      class="form-control mb-2 input-mine"
-      name=""
-    />
+  
+  <app-form-elements forLink="first_name" label="First name" type="text"></app-form-elements>
+    <app-validation-errors
+      [control]="registerForm.get('first_name')"
+      fieldName="First name"
+    ></app-validation-errors>
 
-    @if(registerForm.get('last_name')?.errors &&
-    registerForm.get('last_name')?.touched) {
-    <div class="alert alert-danger">
-      @switch (true) { @case
-      (registerForm.get('last_name')?.hasError('required')) {
-      <p class="m-0">last name is required</p>
-      } @case (registerForm.get('last_name')?.hasError('minlength')) {
-      <p class="m-0">last name is too short</p>
-      } @case (registerForm.get('last_name')?.hasError('maxlength')) {
-      <p class="m-0">last name is too long</p>
-      } @default {
-      <p class="m-0">Invalid input</p>
-      } }
-    </div>
-    }
+    <app-form-elements forLink="last_name" label="Last name" type="text"></app-form-elements>
+    
+    <app-validation-errors
+      [control]="registerForm.get('last_name')"
+      fieldName="Last name"
+    ></app-validation-errors>
+
+    <app-form-elements forLink="age" label="age" type="number"></app-form-elements>
+
+    <app-validation-errors
+      [control]="registerForm.get('age')"
+      fieldName="Age"
+    ></app-validation-errors>
+
+    <app-form-elements forLink="email" label="Email" type="email"></app-form-elements>
+    
+    <app-validation-errors
+      [control]="registerForm.get('email')"
+      fieldName="Email"
+    ></app-validation-errors>
 
 
-    <label for="age">age</label>
-    <input
-      formControlName="age"
-      type="number"
-      class="form-control mb-2 input-mine"
-      name=""
-    />
+    <app-form-elements forLink="password" label="Password" type="password"></app-form-elements>
 
-    @if(registerForm.get('age')?.errors &&
-    registerForm.get('age')?.touched) {
-    <div class="alert alert-danger">
-      @switch (true) { @case
-      (registerForm.get('age')?.hasError('required')) {
-      <p class="m-0">age is required</p>
-      } @case (registerForm.get('age')?.hasError('min')) {
-      <p class="m-0">age is too short</p>
-      } @case (registerForm.get('age')?.hasError('max')) {
-      <p class="m-0">age is too long</p>
-      } @default {
-      <p class="m-0">Invalid input</p>
-      } }
-    </div>
-    }
+      <app-validation-errors
+        [control]="registerForm.get('password')"
+        fieldName="Password"
+      ></app-validation-errors>
+    
 
-
-
-    <label for="email">email</label>
-    <input
-      formControlName="email"
-      type="email"
-      class="form-control mb-2 input-mine"
-      name=""
-    />
-
-     @if(registerForm.get('email')?.errors &&
-    registerForm.get('email')?.touched) {
-    <div class="alert alert-danger">
-      @switch (true) { @case
-      (registerForm.get('email')?.hasError('required')) {
-      <p class="m-0">email is required</p>
-      } @case (registerForm.get('email')?.hasError('email')) {
-      <p class="m-0">pattern is not true</p>
-      } @default {
-      <p class="m-0">Invalid input</p>
-      } }
-    </div>
-    }
-
-   <label for="password">password</label>
-<div class="position-relative">
-  <input
-    formControlName="password"
-    [type]="showPassword ? 'text' : 'password'"
-    class="form-control mb-2 input-mine pe-5"
-    id="password"
-  />
-  <i
-    class="fa"
-    [class.fa-eye]="!showPassword"
-    [class.fa-eye-slash]="showPassword"
-    (click)="togglePasswordVisibility()"
-    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"
-  ></i>
-</div>
-
-    @if(registerForm.get('password')?.errors &&
-    registerForm.get('password')?.touched) {
-    <div class="alert alert-danger">
-      @switch (true) { @case
-      (registerForm.get('password')?.hasError('required')) {
-      <p class="m-0">password is required</p>
-      } @case (registerForm.get('password')?.hasError('pattern')) {
-      <p class="m-0">pattern is false</p>
-      } @default {
-      <p class="m-0">Invalid input</p>
-      } }
-    </div>
-    }
-
-
-    <button [disabled]="registerForm.invalid" type="submit" class="btn btn-info">
+    <button
+      [disabled]="registerForm.invalid"
+      type="submit"
+      class="btn btn-info"
+    >
       <span>Register</span>
-      @if(isLoading) {
-        <i class="fas fa-spinner fa-spin"></i>
+      @if (isLoading) {
+      <i class="fas fa-spinner fa-spin"></i>
       }
     </button>
   </form>

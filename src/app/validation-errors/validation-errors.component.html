@@ -1,0 +1,21 @@
+@if(control?.errors && control?.touched) {
+<div class="alert alert-danger">
+  @switch (true) { @case (control?.hasError('required')) {
+  <p class="m-0">{{ fieldName }} is required</p>
+  } @case (control?.hasError('minlength')) {
+  <p class="m-0">{{ fieldName }} is too short</p>
+  } @case (control?.hasError('maxlength')) {
+  <p class="m-0">{{ fieldName }} is too long</p>
+  } @case (control?.hasError('min')) {
+  <p class="m-0">{{ fieldName }} is too short</p>
+  } @case (control?.hasError('max')) {
+  <p class="m-0">{{ fieldName }} is too long</p>
+  } @case (control?.hasError('email')) {
+  <p class="m-0">pattern is false</p>
+  } @case (control?.hasError('pattern')) {
+  <p class="m-0">pattern is false</p>
+  } @default {
+  <p class="m-0">Invalid input</p>
+  } }
+</div>
+}
