@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-form-elements',
@@ -9,7 +9,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   styleUrl: './form-elements.component.scss'
 })
 export class FormElementsComponent {
-  @Input() forLink:string = ''
-  @Input() label:string = ''
-  @Input() type:string = ''
+  @Input() parentForm!: FormGroup;
+  @Input() forLink: string = '';
+  @Input() label: string = '';
+  @Input() type: string = '';
 }

@@ -7,7 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { TvComponent } from './tv/tv.component';
 import { PeopleComponent } from './people/people.component';
 import { MoviesComponent } from './movies/movies.component';
-import { authGuard } from './auth.guard';
+import { authGuard } from './services/auth.guard';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},

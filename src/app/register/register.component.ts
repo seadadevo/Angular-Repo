@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { ValidationErrorsComponent } from '../validation-errors/validation-errors.component';
 import { CommonModule } from '@angular/common';
-import { FormElementsComponent } from '../form-elements/form-elements.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, ValidationErrorsComponent, FormElementsComponent, CommonModule],
+  imports: [ReactiveFormsModule, ValidationErrorsComponent, CommonModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })

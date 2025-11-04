@@ -1,6 +1,9 @@
-<label [for]="forLink">{{label}}</label>
-<input
+<div [formGroup]="parentForm" class="mb-3">
+  <label [for]="forLink" class="form-label">{{ label }}</label>
+  <input
+    [id]="forLink"
     [formControlName]="forLink"
     [type]="type"
-    class="form-control mb-2 input-mine"
-/>
+    class="form-control input-mine"
+  />
+</div>

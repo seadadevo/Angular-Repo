@@ -1,57 +1,92 @@
 <div class="w-75 mx-auto py-4">
   @if (error) {
-  <div class="alert alert-danger">{{ error }}</div>
+    <div class="alert alert-danger">{{ error }}</div>
   }
 
-  <form
-    (ngSubmit)="submitRegisterForm(registerForm)"
-    [formGroup]="registerForm"
-  >
-  
-  <app-form-elements forLink="first_name" label="First name" type="text"></app-form-elements>
+  <form (ngSubmit)="submitRegisterForm(registerForm)" [formGroup]="registerForm">
+
+    <!-- First Name -->
+    <label for="first_name" class="form-label">First name</label>
+    <input
+      id="first_name"
+      type="text"
+      formControlName="first_name"
+      class="form-control mb-2 input-mine"
+    />
     <app-validation-errors
       [control]="registerForm.get('first_name')"
-      fieldName="First name"
-    ></app-validation-errors>
+      fieldName="First name">
+    </app-validation-errors>
 
-    <app-form-elements forLink="last_name" label="Last name" type="text"></app-form-elements>
-    
+    <!-- Last Name -->
+    <label for="last_name" class="form-label">Last name</label>
+    <input
+      id="last_name"
+      type="text"
+      formControlName="last_name"
+      class="form-control mb-2 input-mine"
+    />
     <app-validation-errors
       [control]="registerForm.get('last_name')"
-      fieldName="Last name"
-    ></app-validation-errors>
+      fieldName="Last name">
+    </app-validation-errors>
 
-    <app-form-elements forLink="age" label="age" type="number"></app-form-elements>
-
+    <!-- Age -->
+    <label for="age" class="form-label">Age</label>
+    <input
+      id="age"
+      type="number"
+      formControlName="age"
+      class="form-control mb-2 input-mine"
+    />
     <app-validation-errors
       [control]="registerForm.get('age')"
-      fieldName="Age"
-    ></app-validation-errors>
+      fieldName="Age">
+    </app-validation-errors>
 
-    <app-form-elements forLink="email" label="Email" type="email"></app-form-elements>
-    
+    <!-- Email -->
+    <label for="email" class="form-label">Email</label>
+    <input
+      id="email"
+      type="email"
+      formControlName="email"
+      class="form-control mb-2 input-mine"
+    />
     <app-validation-errors
       [control]="registerForm.get('email')"
-      fieldName="Email"
-    ></app-validation-errors>
+      fieldName="Email">
+    </app-validation-errors>
 
+    <!-- Password -->
+    <label for="password" class="form-label">Password</label>
+    <div class="position-relative">
+  <input
+    formControlName="password"
+    [type]="showPassword ? 'text' : 'password'"
+    class="form-control mb-2 input-mine pe-5"
+    id="password"
+  />
+  <i
+    class="fa"
+    [class.fa-eye]="!showPassword"
+    [class.fa-eye-slash]="showPassword"
+    (click)="togglePasswordVisibility()"
+    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: black;"
+  ></i>
+</div>
+    <app-validation-errors
+      [control]="registerForm.get('password')"
+      fieldName="Password">
+    </app-validation-errors>
 
-    <app-form-elements forLink="password" label="Password" type="password"></app-form-elements>
-
-      <app-validation-errors
-        [control]="registerForm.get('password')"
-        fieldName="Password"
-      ></app-validation-errors>
-    
-
+    <!-- Submit Button -->
     <button
-      [disabled]="registerForm.invalid"
+      [disabled]="registerForm.invalid || isLoading"
       type="submit"
-      class="btn btn-info"
-    >
+      class="btn btn-info">
       <span>Register</span>
       @if (isLoading) {
-      <i class="fas fa-spinner fa-spin"></i>
+        <i class="fas fa-spinner fa-spin"></i>
       }
     </button>
   </form>
