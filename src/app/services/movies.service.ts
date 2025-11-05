@@ -7,10 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class MoviesService {
 
-  constructor() { 
-    
+  constructor(private _HttpClient:HttpClient) { 
+
   }
 
-  
 
-}
+  getTrending(mediaType:string):Observable<any> {
+    return this._HttpClient.get(`https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=b374522b484f342d39e68aae5bf69b6f`)
+  }
+} 

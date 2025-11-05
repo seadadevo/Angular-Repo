@@ -1,1 +1,48 @@
-<div>Home fas</div>
+<div class="row">
+  <div class="col-md-4 d-flex align-items-center">
+    <div>
+      <div class="brdr w-25 mb-3"></div>
+      <h2 class="h5">Trending <br> Movies <br> To Watch Right Now</h2>
+      <p class="text-muted py-2">Most watched Movies by the Day</p>
+      <div class="brdr w-100 mb-3"></div>
+    </div>
+  </div>
+
+  @for (item of trendingMovies; track $index) {
+    <div class="col-md-2">
+      <app-mediaitem [item]="item"></app-mediaitem>
+    </div>
+  }
+</div>
+<div class="row">
+  <div class="col-md-4 d-flex align-items-center">
+    <div>
+      <div class="brdr w-25 mb-3"></div>
+      <h2 class="h5">Tv <br> Movies <br> To Watch Right Now</h2>
+      <p class="text-muted py-2">Most watched Movies by the Day</p>
+      <div class="brdr w-100 mb-3"></div>
+    </div>
+  </div>
+
+  @for (item of trendingTv; track $index) {
+    <div class="col-md-2">
+      <app-mediaitem [item]="item"></app-mediaitem>
+    </div>
+  }
+</div>
+<div class="row">
+  <div class="col-md-4 d-flex align-items-center">
+    <div>
+      <div class="brdr w-25 mb-3"></div>
+      <h2 class="h5">Persons <br> Movies <br> To Watch Right Now</h2>
+      <p class="text-muted py-2">Most watched Movies by the Day</p>
+      <div class="brdr w-100 mb-3"></div>
+    </div>
+  </div>
+
+  @for (item of trendingPeople; track $index) {
+    <div class="col-md-2">
+      <app-mediaitem [item]="item"></app-mediaitem>
+    </div>
+  }
+</div>

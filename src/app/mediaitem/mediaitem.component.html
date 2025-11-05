@@ -1,0 +1,23 @@
+
+    <div class="item position-relative">
+        @if(item.poster_path){
+            <img
+              class="w-100"
+              [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path"
+              [alt]="item.title"
+            />
+        }
+        @if(item.profile_path){
+            <img
+              class="w-100"
+              [src]="'https://image.tmdb.org/t/p/w500/' + item.profile_path"
+              [alt]="item.title"
+            />
+        }
+      <h3 class="h6 my-2">{{ item.title }} {{item.name}}</h3> 
+      @if(item.vote_average) {
+        <div class="vote position-absolute top-0 end-0 text-white p-1">
+        {{ item.vote_average | number:'1.1-1' }}
+      </div>
+      }
+    </div>

@@ -26,6 +26,13 @@ a, a:hover {
     color: var(--font-Color);
     text-decoration: none;
 }
+.vote{
+    background-color: var(--light-bg);
+}
+.brdr{ 
+    height: 1px;
+    background-color: var(--border-Color);
+}
 
 .input-mine {
     background-color: transparent;
