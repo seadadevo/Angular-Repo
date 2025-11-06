@@ -3,11 +3,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { MoviesService } from '../services/movies.service';
 import { CommonModule, NgClass } from '@angular/common';
 import { MediaitemComponent } from '../mediaitem/mediaitem.component';
+import { SeemorePipe } from '../seemore.pipe';
 
 @Component({
   selector: 'app-moviedetails',
   standalone: true,
-  imports: [CommonModule, NgClass, MediaitemComponent, RouterLink],
+  imports: [CommonModule, NgClass, MediaitemComponent, RouterLink, SeemorePipe],
   templateUrl: './moviedetails.component.html',
   styleUrl: './moviedetails.component.scss'
 })

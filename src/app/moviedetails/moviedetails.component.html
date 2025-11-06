@@ -79,7 +79,7 @@
         }
         @if(itemDetails.overview) {
             <p class="text-info desc mb-3">
-              {{ itemDetails.overview || "No description available." }}
+              {{ itemDetails.overview | seemore:40 }}...
             </p>
         } 
         @if(itemDetails.biography) {
