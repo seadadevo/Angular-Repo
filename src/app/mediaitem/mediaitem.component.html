@@ -1,6 +1,7 @@
 
     <div class="item position-relative">
-        @if(item.poster_path){
+        <a [routerLink]="['/moviedetails', item.id, item.media_type]">
+          @if(item.poster_path){
             <img
               class="w-100"
               [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path"
@@ -20,4 +21,5 @@
         {{ item.vote_average | number:'1.1-1' }}
       </div>
       }
+        </a>
     </div>

@@ -24,9 +24,10 @@ export class HomeComponent implements OnInit  {
   
   ngOnInit() {
     this._MoviesService.getTrending('movie').subscribe({
-      next:(data)=> 
+      next:(data)=> {
         this.trendingMovies = data.results.slice(0, 10)
-      
+        console.log(this.trendingMovies)
+      }
      
     })
     this._MoviesService.getTrending('tv').subscribe({

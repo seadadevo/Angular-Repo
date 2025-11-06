@@ -1,0 +1,112 @@
+<div
+  class="movie-details card shadow-lg border-0 rounded-4 overflow-hidden my-4"
+>
+  <div class="row g-0">
+    <div class="col-md-4">
+      @if(itemDetails.poster_path){
+          <img
+          class="img-fluid h-100 w-100 object-fit-cover"
+          [src]="'https://image.tmdb.org/t/p/w500/' + itemDetails.poster_path"
+          [alt]="itemDetails.title || itemDetails.name"
+        />
+      }
+      @if(itemDetails.profile_path){
+          <img
+          class="img-fluid h-100 w-100 object-fit-cover"
+          [src]="'https://image.tmdb.org/t/p/w500/' + itemDetails.profile_path"
+          [alt]="itemDetails.title || itemDetails.name"
+        />
+      }
+    </div>
+
+    <div class="col-md-8 p-4 d-flex flex-column justify-content-between">
+      <div>
+        <h2 class="fw-bold mb-2">
+          {{ itemDetails.title || itemDetails.name }}
+         @if(itemDetails.release_date || itemDetails.first_air_date) {
+             <small class="text-muted ms-2">
+               ({{
+                 itemDetails.release_date || itemDetails.first_air_date
+                   | date : "yyyy"
+               }})
+             </small>
+            }
+            @if(itemDetails.birthday) {
+             <small class="text-muted ms-2">
+               ({{
+                 itemDetails.birthday   }})
+             </small>
+
+         }
+        </h2>
+
+        
+        <div class="mb-3">
+          @for (gener of itemDetails.genres; track $index) {
+          <span class="badge bg-dark me-2 mb-2 px-3 py-2">{{
+            gener.name
+          }}</span>
+          }
+        </div>
+
+        <div class="movie-stats d-flex flex-wrap align-items-center mb-3">
+          <p
+            class="me-3 mb-1 fw-semibold popularity"
+            [ngClass]="{
+              'text-success': itemDetails.popularity < 100,
+              'text-warning':
+                itemDetails.popularity >= 100 && itemDetails.popularity < 300,
+              'text-danger': itemDetails.popularity >= 300
+            }"
+          >
+            🔥 Popularity: {{ itemDetails.popularity | number : "1.0-0" }}
+          </p>
+          @if(itemDetails.vote_average){
+              <p class="me-3 mb-1 text-info fw-semibold">
+                ⭐ Rating: {{ itemDetails.vote_average | number : "1.1-1" }}
+              </p>
+          }
+          @if(itemDetails.original_language){
+              <p class="mb-1 text-secondary fw-semibold">
+                🌍 Language: {{ itemDetails.original_language | uppercase }}
+              </p>
+          }
+        </div>
+        @if(itemDetails.place_of_birth) {
+            <p class="text-secondary desc mb-3">
+              <span class="text-info">Birth on: </span> {{ itemDetails.place_of_birth }}
+            </p>
+        }
+        @if(itemDetails.overview) {
+            <p class="text-info desc mb-3">
+              {{ itemDetails.overview || "No description available." }}
+            </p>
+        } 
+        @if(itemDetails.biography) {
+            <p class="text-muted desc mb-3">
+              {{ itemDetails.biography || "No biography available." }}
+            </p>
+        }
+      </div>
+
+      <div
+        class="d-flex align-items-center justify-content-between mt-3 border-top pt-2"
+      >
+      @if(itemDetails.release_date || itemDetails.first_air_date){
+          <small class="text-info">
+            Released on:
+            {{
+              itemDetails.release_date || itemDetails.first_air_date
+                | date : "longDate"
+            }}
+          </small>
+      }
+      @if(itemDetails.vote_count){
+          <small class="text-info">
+            Vote Count: {{ itemDetails.vote_count }}
+          </small>
+      }
+      </div>
+    </div>
+  </div>
+</div>

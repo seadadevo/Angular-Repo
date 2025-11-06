@@ -1,0 +1,40 @@
+.movie-details {
+  background-color: #111;
+  color: #f8f9fa;
+}
+
+.movie-details img {
+  object-fit: cover;
+  height: 100%;
+}
+
+.movie-details .desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  max-height: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.popularity {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.popularity:hover {
+  transform: scale(1.05);
+}
+
+.text-success {
+  color: #28a745 !important;
+}
+.text-warning {
+  color: #ffc107 !important;
+}
+.text-danger {
+  color: #dc3545 !important;
+}
+
+.badge {
+  background-color: #343a40;
+  font-size: 0.85rem;
+  border-radius: 1rem;
+}

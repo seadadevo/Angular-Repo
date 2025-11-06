@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
     error: string = '';
     isLoading: boolean = false;
     showPassword: boolean = false;
-  
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }

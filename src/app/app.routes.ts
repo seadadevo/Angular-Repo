@@ -8,6 +8,7 @@ import { TvComponent } from './tv/tv.component';
 import { PeopleComponent } from './people/people.component';
 import { MoviesComponent } from './movies/movies.component';
 import { authGuard } from './services/auth.guard';
+import { MoviedetailsComponent } from './moviedetails/moviedetails.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -16,6 +17,7 @@ export const routes: Routes = [
     {path:'movies',canActivate: [authGuard],component: MoviesComponent},
     {path:'tv',canActivate: [authGuard],component: TvComponent},
     {path:'people',canActivate: [authGuard],component: PeopleComponent},
+    {path:'moviedetails/:id/:media_type',canActivate: [authGuard],component: MoviedetailsComponent},
     
     
     {path:'login',component: LoginComponent},
