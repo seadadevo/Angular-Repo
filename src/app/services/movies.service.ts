@@ -15,4 +15,7 @@ export class MoviesService {
   getTrending(mediaType:string):Observable<any> {
     return this._HttpClient.get(`https://api.themoviedb.org/3/trending/${mediaType}/week?api_key=b374522b484f342d39e68aae5bf69b6f`)
   }
+  getSimilarMovie(mediaType:string, id:number):Observable<any> {
+    return this._HttpClient.get(`https://api.themoviedb.org/3/${mediaType}/${id}/similar?api_key=b374522b484f342d39e68aae5bf69b6f&language=en-US&page=1`)
+  }
 } 

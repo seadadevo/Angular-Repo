@@ -38,3 +38,64 @@
   font-size: 0.85rem;
   border-radius: 1rem;
 }
+
+
+.similar-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #0dcaf0 #111; 
+
+  
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #111;
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #0dcaf0, #6610f2);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #0bb3e6, #520dc2);
+  }
+}
+
+
+.item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #1a1a1a;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.07);
+    z-index: 10;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  }
+}
+
+
+.movie-img {
+  height: 260px;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+}
+
+
+.movie-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  height: 40%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.item:hover .movie-overlay {
+  opacity: 1;
+}

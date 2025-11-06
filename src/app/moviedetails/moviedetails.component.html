@@ -110,3 +110,28 @@
     </div>
   </div>
 </div>
+
+<div class="row flex-nowrap overflow-x-scroll similar-scroll py-3">
+  @for(item of similarMovies; track $index){
+    <div class="col-md-2 col-6">
+      <div (click)="getSimilar( mediaType, item.id)" class="item position-relative me-3 rounded-3 overflow-hidden shadow-sm">
+
+          @if(item.poster_path){
+            <img
+              class="w-100 rounded-3 movie-img"
+              [src]="'https://image.tmdb.org/t/p/w500/' + item.poster_path"
+              [alt]="item.title || item.name"
+            />
+          }
+          <div class="movie-overlay d-flex flex-column justify-content-end p-2">
+            <h3 class="h6 fw-semibold m-0 text-truncate">{{ item.title || item.name }}</h3>
+            @if(item.vote_average) {
+              <small class="text-warning">⭐ {{ item.vote_average | number:'1.1-1' }}</small>
+            }
+          </div>
+    
+      </div>
+    </div>
+  }
+</div>
+
