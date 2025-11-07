@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../services/movies.service';
 import { MediaitemComponent } from '../mediaitem/mediaitem.component';
+import { FormsModule } from '@angular/forms';
+import { SearchPipe } from '../search.pipe';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, MediaitemComponent],
+  imports: [CommonModule, MediaitemComponent, FormsModule, SearchPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
@@ -15,7 +17,7 @@ export class HomeComponent implements OnInit  {
   
   constructor(private _MoviesService:MoviesService){
   }
-  
+  term:string = ''
   trendingMovies:any[] = [];
   trendingTv:any[] =  [];
   trendingPeople:any[] =  [];

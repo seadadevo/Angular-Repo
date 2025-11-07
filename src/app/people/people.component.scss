@@ -1,0 +1,72 @@
+.people-section {
+  min-height: 100vh;
+  animation: fadeIn 0.8s ease both;
+
+  .text-gradient {
+    background: linear-gradient(90deg, #24baef, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .person-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    padding: 15px 10px;
+    transition: all 0.35s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+
+    &:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 6px 20px rgba(36, 186, 239, 0.25);
+      border-color: rgba(36, 186, 239, 0.4);
+    }
+
+    .person-img {
+      position: relative;
+
+      img {
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border: 3px solid var(--light-bg);
+        transition: all 0.3s ease;
+      }
+
+      .popularity {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+        background-color: var(--light-bg);
+        color: #fff;
+        font-size: 0.75rem;
+        padding: 3px 7px;
+        border-radius: 10px;
+      }
+    }
+
+    .name {
+      color: var(--font-Color);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    .known {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

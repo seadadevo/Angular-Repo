@@ -9,7 +9,7 @@ export class MoviesService {
 
   constructor(private _HttpClient:HttpClient) {}
 
-  getItemDetails(mediaType:string, id: number) {
+  getItemDetails(mediaType:string, id: number):Observable<any> {
     return this._HttpClient.get(`https://api.themoviedb.org/3/${id}/${mediaType}?api_key=b374522b484f342d39e68aae5bf69b6f`)
   }
   getTrending(mediaType:string):Observable<any> {

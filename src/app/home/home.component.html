@@ -1,48 +1,72 @@
-<div class="row">
-  <div class="col-md-4 d-flex align-items-center">
-    <div>
-      <div class="brdr w-25 mb-3"></div>
-      <h2 class="h5">Trending <br> Movies <br> To Watch Right Now</h2>
-      <p class="text-muted py-2">Most watched Movies by the Day</p>
-      <div class="brdr w-100 mb-3"></div>
+<div class="container py-5">
+
+  <!-- 🔍 Search -->
+  <div class="row justify-content-center mb-5">
+    <div class="col-md-6">
+      <input
+        type="text"
+        [(ngModel)]="term"
+        class="form-control input-mine rounded-pill px-4 py-3 shadow-sm w-100"
+        placeholder="Search for movies..."
+      />
     </div>
   </div>
 
-  @for (item of trendingMovies; track $index) {
-    <div class="col-md-2">
-      <app-mediaitem [item]="item"></app-mediaitem>
+  <!-- 🎬 Trending Movies -->
+  <section class="category-section mb-5">
+    <div class="section-header mb-4">
+      <div>
+        <div class="brdr w-25 mb-2"></div>
+        <h2 class="h4 fw-bold">🎬 Trending Movies</h2>
+        <p class="text-secondary mb-0">Most watched movies today</p>
+      </div>
     </div>
-  }
-</div>
-<div class="row">
-  <div class="col-md-4 d-flex align-items-center">
-    <div>
-      <div class="brdr w-25 mb-3"></div>
-      <h2 class="h5">Tv <br> Movies <br> To Watch Right Now</h2>
-      <p class="text-muted py-2">Most watched Movies by the Day</p>
-      <div class="brdr w-100 mb-3"></div>
-    </div>
-  </div>
 
-  @for (item of trendingTv; track $index) {
-    <div class="col-md-2">
-      <app-mediaitem [item]="item"></app-mediaitem>
+    <div class="row g-3 flex-nowrap overflow-auto scroll-section pb-3">
+      @for (item of trendingMovies | search:term; track $index) {
+        <div class="col-md-2 col-6">
+          <app-mediaitem [item]="item"></app-mediaitem>
+        </div>
+      }
     </div>
-  }
-</div>
-<div class="row">
-  <div class="col-md-4 d-flex align-items-center">
-    <div>
-      <div class="brdr w-25 mb-3"></div>
-      <h2 class="h5">Persons <br> Movies <br> To Watch Right Now</h2>
-      <p class="text-muted py-2">Most watched Movies by the Day</p>
-      <div class="brdr w-100 mb-3"></div>
-    </div>
-  </div>
+  </section>
 
-  @for (item of trendingPeople; track $index) {
-    <div class="col-md-2">
-      <app-mediaitem [item]="item"></app-mediaitem>
+  <!-- 📺 Trending TV -->
+  <section class="category-section mb-5">
+    <div class="section-header mb-4">
+      <div>
+        <div class="brdr w-25 mb-2"></div>
+        <h2 class="h4 fw-bold">📺 Trending TV Shows</h2>
+        <p class="text-secondary mb-0">Most popular shows right now</p>
+      </div>
     </div>
-  }
+
+    <div class="row g-3 flex-nowrap overflow-auto scroll-section pb-3">
+      @for (item of trendingTv; track $index) {
+        <div class="col-md-2 col-6">
+          <app-mediaitem [item]="item"></app-mediaitem>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- 👤 Trending People -->
+  <section class="category-section mb-5">
+    <div class="section-header mb-4">
+      <div>
+        <div class="brdr w-25 mb-2"></div>
+        <h2 class="h4 fw-bold">👤 Trending People</h2>
+        <p class="text-secondary mb-0">Most popular people this week</p>
+      </div>
+    </div>
+
+    <div class="row g-3 flex-nowrap overflow-auto scroll-section pb-3">
+      @for (item of trendingPeople; track $index) {
+        <div class="col-md-2 col-6">
+          <app-mediaitem [item]="item"></app-mediaitem>
+        </div>
+      }
+    </div>
+  </section>
+
 </div>

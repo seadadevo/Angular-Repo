@@ -1,42 +1,107 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-    --bg-main: #131722 ;
-    --light-bg: #24baef;
-    --transparent-bg:  rgba(36, 184, 239, 0.6);
+  --bg-main: #0a0f1c; /* خلفية أغمق تعطي عمق */
+  --bg-gradient-start: #0a0f1c;
+  --bg-gradient-mid: #132235;
+  --bg-gradient-end: #08121e;
 
-    --font-Color: #fff;
-    --second-FontColor: #949cb0;
+  --light-bg: #24baef;
+  --transparent-bg: rgba(36, 184, 239, 0.6);
 
-    --border-Color: #a8a8a83d;
-    --border-Height: 1px;
+  --font-Color: #fff;
+  --second-FontColor: #949cb0;
+
+  --border-Color: #a8a8a83d;
+  --border-Height: 1px;
 }
 
+/* Light Background Accent */
 .bg-mine-light {
-    background-color: var(--light-bg);
+  background-color: var(--light-bg);
 }
 
+/* Body Styling */
 body {
-    background-color: var(--bg-main);
-    font-family: 'Montserrat', sans-serif;
-    color: var(--font-Color);
+  background: linear-gradient(145deg,
+      var(--bg-gradient-start) 0%,
+      var(--bg-gradient-mid) 50%,
+      var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--font-Color);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
+/* Add a subtle glow effect to background */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 30% 20%,
+    rgba(36, 186, 239, 0.15),
+    transparent 60%
+  ),
+  radial-gradient(
+    circle at 70% 80%,
+    rgba(12, 34, 54, 0.25),
+    transparent 70%
+  );
+  z-index: -1;
+  animation: subtleGlow 10s ease-in-out infinite alternate;
+}
+
+@keyframes subtleGlow {
+  0% { transform: scale(1) translate(0, 0); opacity: 0.8; }
+  100% { transform: scale(1.1) translate(-2%, 2%); opacity: 1; }
+}
+
+/* Links */
 a, a:hover {
-    color: var(--font-Color);
-    text-decoration: none;
-}
-.vote{
-    background-color: var(--light-bg);
-}
-.brdr{ 
-    height: 1px;
-    background-color: var(--border-Color);
+  color: var(--font-Color);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
+a:hover {
+  color: var(--light-bg);
+}
+
+/* Vote Badge */
+.vote {
+  background-color: var(--light-bg);
+  color: #fff;
+  border-radius: 5px;
+  padding: 2px 6px;
+  font-weight: 600;
+}
+
+/* Border Lines */
+.brdr {
+  height: 1px;
+  background-color: var(--border-Color);
+}
+
+/* Input Field */
 .input-mine {
-    background-color: transparent;
-    color: var(--font-Color);
-    border: solid 1px var(--border-Color);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--font-Color);
+  border: solid 1px var(--border-Color);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 
+.input-mine:focus {
+  outline: none;
+  border-color: var(--light-bg);
+  background-color: rgba(36, 184, 239, 0.1);
+}

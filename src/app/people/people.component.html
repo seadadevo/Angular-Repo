@@ -1,1 +1,40 @@
-<p>people works!</p>
+<section class="people-section py-5">
+  <div class="container">
+   
+    <div class="text-center mb-5">
+      <h1 class="fw-bold display-5 text-gradient">Trending People</h1>
+      <p class="text-secondary w-75 mx-auto">
+        Meet the most talked-about actors, directors, and creators of the week.
+      </p>
+      <div class="brdr w-25 mx-auto mt-3"></div>
+    </div>
+
+    
+    <div *ngIf="isLoading" class="text-center py-5">
+      <div class="spinner-border text-info" role="status"></div>
+      <p class="mt-3 text-secondary">Loading popular people...</p>
+    </div>
+
+   
+    <div class="row g-4" *ngIf="!isLoading">
+      <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6" *ngFor="let person of people">
+        <div class="person-card text-center">
+          <div class="person-img position-relative">
+            <img
+              [src]="person.profile_path ? 'https://image.tmdb.org/t/p/w500' + person.profile_path : 'https://via.placeholder.com/300x450?text=No+Image'"
+              [alt]="person.name"
+              class="w-100 rounded-circle shadow-sm"
+            />
+            <span class="popularity">⭐ {{ person.popularity | number:'1.1-1' }}</span>
+          </div>
+          <div class="info mt-3">
+            <h5 class="name">{{ person.name }}</h5>
+            <p class="known text-secondary small mb-0">
+              {{ person.known_for_department }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

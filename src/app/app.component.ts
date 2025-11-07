@@ -10,6 +10,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { TvComponent } from './tv/tv.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ import { RegisterComponent } from './register/register.component';
     CommonModule,
     RouterOutlet,
     HttpClientModule, 
+    FormsModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

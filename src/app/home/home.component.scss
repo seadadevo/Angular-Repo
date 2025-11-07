@@ -1,0 +1,110 @@
+:host {
+  display: block;
+  background: transparent; /* خلي الخلفية شفافة علشان تظهر الجريدينت العام */
+  color: var(--font-Color);
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+/* 🌈 Search Input */
+input.form-control {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-Color);
+  color: var(--font-Color);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  transition: all 0.3s ease;
+}
+
+input.form-control:focus {
+  border-color: var(--light-bg);
+  box-shadow: 0 0 12px var(--transparent-bg);
+  background-color: rgba(36, 186, 239, 0.08);
+}
+
+/* 🧩 Section Header */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #fff;
+  border-left: 4px solid var(--light-bg);
+  padding-left: 10px;
+}
+
+.text-secondary {
+  color: var(--second-FontColor) !important;
+}
+
+/* ✨ Scroll Styling */
+.scroll-section {
+  scrollbar-width: thin;
+  scrollbar-color: var(--light-bg) transparent;
+  padding-bottom: 0.5rem;
+}
+
+.scroll-section::-webkit-scrollbar {
+  height: 6px;
+}
+
+.scroll-section::-webkit-scrollbar-thumb {
+  background-color: var(--light-bg);
+  border-radius: 10px;
+}
+
+.scroll-section::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* 💫 Media Item Card Hover */
+app-mediaitem {
+  display: block;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  border-radius: 12px;
+}
+
+app-mediaitem:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 12px 25px rgba(36, 184, 239, 0.25);
+}
+
+/* 🎬 Category Section Look */
+.category-section {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.category-section::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--light-bg), transparent);
+}
+
+/* 🎥 Subtle section animation */
+.category-section {
+  animation: fadeInUp 0.8s ease both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
