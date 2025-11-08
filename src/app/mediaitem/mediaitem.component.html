@@ -14,7 +14,7 @@
               [src]="'https://image.tmdb.org/t/p/w500/' + item.profile_path"
               [alt]="item.title"
             />
-        } @else {
+        } @else if(!item.poster_path && !item.profile_path) {
           <img class="w-100 imgageReplace" src="../../assets/images/person.jpg"/>
         }
       <h3 class="h6 my-2">{{ item.title ? (item.title | watch) : '' }} {{ item.name }}</h3> 

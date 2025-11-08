@@ -47,9 +47,18 @@
           </li>
         }
         @if(isLogin) {
-          <li class="nav-item">
-              <a class="nav-link text-white" routerLink="settings">Settings</a>
-          </li>
+           <li class="nav-item dropdown">
+          <a class="nav-link text-white dropdown-toggle" routerLink="settings"  data-bs-toggle="dropdown" aria-expanded="false">
+            Settings
+          </a>
+          <ul class="dropdown-menu dropDown">
+            <li><a class="dropdown-item" routerLink="settings/password">Password</a></li>
+            <li><a class="dropdown-item" routerLink="settings/privacy">Privacy</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+
           <li class="nav-item">
               <a (click)="logOut()" class="nav-link text-white" routerLink="register">Logout</a>
           </li>
