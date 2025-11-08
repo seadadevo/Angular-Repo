@@ -24,4 +24,17 @@
       </div>
       }
         </a>
+        @if(!item.profile_path){
+          <div style="display: flex; align-items: center;gap:10px; justify-content: space-between;">
+            @if(!isInWatchlist){
+              <button (click)="addItem(item)"
+            class="btn btn-outline-warning btn-sm w-100 "
+            >Add to Watchlist</button>
+            } @else {
+              <button (click)="removeItem(item)"
+              class="btn btn-sm w-100 removebtn" 
+              >remove from Watchlist</button>
+            }
+          </div>
+        }
     </div>
