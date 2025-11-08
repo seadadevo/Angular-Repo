@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from '../services/movies.service';
+import { MediaitemComponent } from '../mediaitem/mediaitem.component';
 
 @Component({
   selector: 'app-people',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, MediaitemComponent],
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.scss']
 })

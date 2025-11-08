@@ -16,6 +16,7 @@ export const routes: Routes = [
     {path:'about',canActivate: [authGuard],component: AboutComponent},
     {path:'movies',canActivate: [authGuard],component: MoviesComponent},
     {path:'tv',canActivate: [authGuard],component: TvComponent},
+    {path:'settings',canActivate: [authGuard], loadChildren:()=> import('./settings/settings.module').then((res) => res.SettingsModule)},
     {path:'people',canActivate: [authGuard],component: PeopleComponent},
     {path:'moviedetails/:id/:media_type',canActivate: [authGuard],component: MoviedetailsComponent},
     

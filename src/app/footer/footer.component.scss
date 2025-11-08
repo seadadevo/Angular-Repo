@@ -7,16 +7,16 @@
   overflow: hidden;
 }
 
-/* Glow line */
+
 .footer::before {
   content: "";
   position: absolute;
-  top: 0;
+  top: 0; 
   left: 50%;
   transform: translateX(-50%);
   width: 60%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--light-bg), transparent);
+  background: linear-gradient(90deg, transparent ,var(--light-bg), transparent);
   animation: footerGlow 3s ease-in-out infinite;
 }
 
@@ -25,7 +25,7 @@
   50% { opacity: 1; transform: translateX(-50%) scaleX(1.1); }
 }
 
-/* Headings */
+
 .footer h5, .footer h6 {
   font-size: 1.8rem;
   background: linear-gradient(90deg, var(--light-bg), #00d4ff);
@@ -35,7 +35,7 @@
   transition: transform 0.3s ease;
 }
 
-/* Links */
+
 .footer-links a {
   display: block;
   color: var(--second-FontColor);
@@ -50,7 +50,7 @@
   transform: translateX(5px);
 }
 
-/* Icons */
+
 .footer-icons i {
   font-size: 1.2rem;
   color: var(--second-FontColor);
@@ -64,20 +64,20 @@
   transform: translateY(-3px);
 }
 
-/* Brand highlight */
+
 .brand-highlight {
   color: var(--light-bg);
   font-weight: 600;
 }
 
-/* Text */
+
 .footer p {
   color: var(--second-FontColor);
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
-/* Responsive */
+
 @media (max-width: 768px) {
   .footer {
     text-align: center;

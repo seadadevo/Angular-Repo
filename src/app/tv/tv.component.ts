@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MoviesService } from '../services/movies.service';
+import { MediaitemComponent } from '../mediaitem/mediaitem.component';
 
 @Component({
   selector: 'app-tv',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, MediaitemComponent],
   templateUrl: './tv.component.html',
   styleUrls: ['./tv.component.scss']
 })
