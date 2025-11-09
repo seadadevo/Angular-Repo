@@ -1,3 +1,4 @@
+// ملف: mediaitem.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -16,20 +17,37 @@ export class MediaitemComponent implements OnInit{
   @Input() item:any = {} 
 
   isInWatchlist: boolean = false;
-  constructor(private _WatchListService: WatchlistService){
-
-  }
+  
+  
+  private itemID_to_check: string | null = null; 
+  
+  constructor(private _WatchListService: WatchlistService){ }
 
   ngOnInit(): void {
-    this._WatchListService.isItemInWatchlist(this.item.id).subscribe(result => {
-      this.isInWatchlist = result;
-    })
+    
+    if (this.item.id) {
+      
+      this.itemID_to_check = this.item.id.toString();
+    } 
+    else if (this.item.movieID) { 
+     
+      this.itemID_to_check = this.item.movieID.toString();
+    }
+
+   
+    if (this.itemID_to_check) {
+      this._WatchListService.isItemInWatchlist(this.itemID_to_check).subscribe(result => {
+        this.isInWatchlist = result;
+      });
+    }
   }
   
   addItem(item:any){
     this._WatchListService.addToWatchList(item);
   }
+  
   removeItem(item:any){
+   
     this._WatchListService.removeFromWatchlist(item);
   }
 }

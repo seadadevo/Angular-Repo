@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    @for(item of watchListItems; track item.id) {
+   @for(item of watchListItems; track item.movieID) {
       <div class="col-md-3">
         <app-mediaitem [item]="item"></app-mediaitem>
       </div>
