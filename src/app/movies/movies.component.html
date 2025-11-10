@@ -1,6 +1,5 @@
 <section class="movies py-5">
   <div class="container">
-   
     <div class="text-center mb-5">
       <h1 class="fw-bold display-5 text-gradient">Trending Movies</h1>
       <p class="text-secondary w-75 mx-auto">
@@ -19,22 +18,32 @@
       />
     </div>
 
-  @if(isLoading) {
+    <div class="d-flex gap-2 flex-wrap mb-4">
+      <button (click)="showAllMovies()" class="btn btn-outline-light">
+        All Genres
+      </button>
+
+      @for(genere of filtergeneres; track $index) {
+      <button (click)="filterByGeneres(genere.id)" class="btn btn-outline-info">
+        {{ genere.name }}
+      </button>
+      }
+    </div>
+
+    @if(isLoading) {
     <div class="text-center py-5">
       <div class="spinner-border text-info" role="status"></div>
       <p class="mt-3 text-secondary">Fetching awesome movies...</p>
     </div>
-  }
-
-  @if(!isLoading) {
+    } @if(!isLoading) {
     <div class="row g-4">
       @for(item of filteredShows; track $index){
-        <div class="col-xl-3 col-lg-4 col-md-6">
-          <app-mediaitem [item]="item"></app-mediaitem>
-        </div>
+      <div class="col-xl-3 col-lg-4 col-md-6">
+        <app-mediaitem [item]="item"></app-mediaitem>
+      </div>
       }
     </div>
 
-  }
+    }
   </div>
 </section>

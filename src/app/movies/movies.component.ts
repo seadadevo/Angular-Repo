@@ -19,7 +19,8 @@ export class MoviesComponent implements OnInit {
   term: string = '';
   filteredShows: any[] = [];
   constructor(private _MoviesService: MoviesService) {}
-
+  generes: any[] = []
+  filtergeneres: any[] = []
   ngOnInit(): void {
     this._MoviesService.getTrending('movie').subscribe({
       next: (res) => {
@@ -32,12 +33,30 @@ export class MoviesComponent implements OnInit {
         this.isLoading = false;
       }
     });
+    this._MoviesService.getAllGeners('movie').subscribe({
+      next: (res) => {
+        this.generes = res.genres;
+        this.filtergeneres = [...this.generes]
+      },
+      error: (err) => {
+        console.error('Error loading generes:', err);
+      }
+    });
   }
 
   searchMovise(): void {
     const termLower = this.term.toLowerCase();
     this.filteredShows = this.movies.filter((movie) =>
       movie.title.toLowerCase().includes(termLower)
+    );
+  }
+  showAllMovies(){
+    this.filteredShows = [...this.movies];
+  }
+  filterByGeneres(genreID:number): void {
+    
+    this.filteredShows = this.movies.filter((movie) =>
+      movie.genre_ids.includes(genreID)
     );
   }
 }
