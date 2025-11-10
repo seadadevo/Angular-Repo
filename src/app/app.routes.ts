@@ -10,6 +10,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { authGuard } from './services/auth.guard';
 import { MoviedetailsComponent } from './moviedetails/moviedetails.component';
 import { MoviesListComponent } from './movies-list/movies-list.component';
+import { WatchedComponent } from './watched/watched.component';
 
 export const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -20,6 +21,7 @@ export const routes: Routes = [
     {path:'settings',canActivate: [authGuard], loadChildren:()=> import('./settings/settings.module').then((res) => res.SettingsModule)},
     {path:'people',canActivate: [authGuard],component: PeopleComponent},
     {path:'watchList',canActivate: [authGuard],component: MoviesListComponent},
+    {path:'watched',canActivate: [authGuard],component: WatchedComponent},
     {path:'moviedetails/:id/:media_type',canActivate: [authGuard],component: MoviedetailsComponent},
     
     

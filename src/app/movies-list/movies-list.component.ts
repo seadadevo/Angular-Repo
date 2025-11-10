@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { WatchlistService } from '../services/watchlist.service';
 import { MediaitemComponent } from '../mediaitem/mediaitem.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-movies-list',
   standalone: true,
-  imports: [MediaitemComponent],
+  imports: [MediaitemComponent, RouterLink],
   templateUrl: './movies-list.component.html',
   styleUrl: './movies-list.component.scss'
 })

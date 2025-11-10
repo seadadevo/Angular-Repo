@@ -10,3 +10,23 @@
     background: red;
     color: black;
 }
+
+.btn-outline-success {
+    transition: all 0.3s;
+    border: 1px solid #198754; // لون أخضر
+    color: #198754;
+}
+.btn-outline-success:hover {
+    background: #198754;
+    color: white;
+}
+
+.btn-success {
+    background-color: #198754;
+    color: white;
+    border: 1px solid #198754;
+}
+.btn-success:hover {
+    background-color: #146c43; // أخضر أغمق
+    border-color: #13653f;
+}

@@ -20,15 +20,29 @@
     </a>
         @if(!item.profile_path){
           <div style="display: flex; align-items: center;gap:10px; justify-content: space-between;">
+
             @if(!isInWatchlist){
-              <button (click)="addItem(item)"
-            class="btn btn-outline-warning btn-sm w-100 "
-            >Add to Watchlist</button>
+              <button (click)="addItemToWatchList(item)"
+                class="btn btn-outline-warning btn-sm w-100"
+                
+                [disabled]="isInWatched" 
+                >Add to Watchlist</button>
             } @else {
-              <button (click)="removeItem(item)"
-              class="btn btn-sm w-100 removebtn" 
-              >remove from Watchlist</button>
+              <button (click)="removeItemFromWatchList(item)"
+                class="btn btn-sm w-100 removebtn" 
+                >Remove Watchlist</button>
             }
+
+            @if(!isInWatched){
+              <button (click)="addItemToWatched(item)"
+                class="btn btn-outline-success btn-sm w-100"
+                >Add to Watched</button>
+            } @else {
+              <button (click)="removeItemFromWatched(item)"
+                class="btn btn-sm w-100 btn-success" 
+                >Remove Watched</button>
+            }
+
           </div>
         }
     </div>

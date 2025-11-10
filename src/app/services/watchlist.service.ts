@@ -50,7 +50,7 @@ export class WatchlistService {
       .subscribe(response => {
        
         if (response && response.Favorites) {
-          
+
           this.watchList.next(response.Favorites);
         }
       });
