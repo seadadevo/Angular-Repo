@@ -8,7 +8,7 @@
 </section>
 
 <section class="container py-5">
-  @if (watchedItems?.length) {
+  @if (watchedItems.length) {
     <div class="row g-4">
       @for (item of watchedItems; track item.movieID) {
         <div class="col-12 col-sm-6 col-md-4 col-lg-3">

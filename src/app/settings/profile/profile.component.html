@@ -1,1 +1,48 @@
-<p>profile works!</p>
+<div class="profile-container">
+  
+ 
+  @if(userData) {
+    <div class="profile-card">
+      
+     
+      <div class="avatar-container">
+        <div class="avatar-placeholder">
+          
+          {{ getInitials(userData.first_name, userData.last_name) }}
+        </div>
+      </div>
+      
+     
+      <div class="name-container">
+        <h1 class="user-name">
+          {{ userData.first_name }} {{ userData.last_name }}
+        </h1>
+      </div>
+      
+      
+      <div class="details-container">
+      
+        <div class="detail-item">
+          <span class="detail-label">Email:</span>
+          <span class="detail-value">{{ userData.email }}</span>
+        </div>
+        
+        <div class="detail-item">
+          <span class="detail-label">Age:</span>
+          <span class="detail-value">{{ userData.age }}</span>
+        </div>
+        
+      </div>
+      
+      
+      <button (click)="logout()" class="btn btn-danger logout-btn">
+        <i class="fas fa-sign-out-alt me-2"></i> Logout
+      </button>
+      
+    </div>
+  } @else {
+    
+    <p>Loading profile...</p>
+  }
+  
+</div>
