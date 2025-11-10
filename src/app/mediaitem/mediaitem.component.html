@@ -15,10 +15,10 @@
         <img class="w-100 imgageReplace" src="../../assets/images/person.jpg"/>
       }
 
-    <h3 class="h6 my-2">{{ item.movieName || (item.title | watch) || item.name }}</h3> 
+    <h3 class="h6 my-2">{{ item.title  || item.name || item.movieName }}</h3> 
       
     </a>
-        @if(!item.profile_path){
+        @if(item.poster_path || item.imgUrl){
           <div style="display: flex; align-items: center;gap:10px; justify-content: space-between;">
 
             @if(!isInWatchlist){
