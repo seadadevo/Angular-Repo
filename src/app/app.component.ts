@@ -11,6 +11,7 @@ import { TvComponent } from './tv/tv.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
+import { CustomCursorComponent } from './custom-cursor/custom-cursor.component';
 
 @Component({
   selector: 'app-root',
@@ -27,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     RouterOutlet,
     HttpClientModule, 
-    FormsModule
+    FormsModule,
+    CustomCursorComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

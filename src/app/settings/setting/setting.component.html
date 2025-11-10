@@ -1,0 +1,233 @@
+<div class="settings container py-5" role="form" aria-labelledby="settings-title">
+  <header class="settings__header text-center mb-5">
+    <h1 id="settings-title" class="fw-bold display-5">General Settings</h1>
+    <p class="text-secondary w-75 mx-auto">
+      Customize your viewing experience. Changes are saved automatically.
+    </p>
+    <div class="brdr w-25 mx-auto mt-3" aria-hidden="true"></div>
+  </header>
+
+  <div class="row g-4">
+    
+    <section class="col-lg-6">
+      <div class="setting-card" aria-labelledby="card-display-title">
+        <h2 id="card-display-title" class="card-title h4">
+          <i class="fas fa-palette me-2" aria-hidden="true"></i> Display
+        </h2>
+        <div class="brdr mb-3" aria-hidden="true"></div>
+
+        <div class="setting-item">
+          <div class="setting-item__meta">
+            <label class="setting-item__label" for="themeSwitch">Theme</label>
+            <p id="theme-help" class="setting-item__help text-secondary mb-0">
+              Toggle between light and dark modes.
+            </p>
+          </div>
+
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="themeSwitch"
+              aria-describedby="theme-help theme-state"
+              [checked]="currentTheme === 'dark'"
+              (change)="toggleTheme()"
+            />
+            <span id="theme-state" class="form-check-label">
+              @if(currentTheme === 'dark') { Dark Mode } @else { Light Mode }
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+   
+    <section class="col-lg-6">
+      <div class="setting-card" aria-labelledby="card-accessibility-title">
+        <h2 id="card-accessibility-title" class="card-title h4">
+          <i class="fas fa-universal-access me-2" aria-hidden="true"></i> Accessibility
+        </h2>
+        <div class="brdr mb-3" aria-hidden="true"></div>
+
+       
+        <div class="setting-item">
+          <div class="setting-item__meta">
+            <label class="setting-item__label" for="fontSizeRange">
+              Font Size <span class="text-secondary">({{ currentFontSize }}px)</span>
+            </label>
+            <p id="font-size-help" class="setting-item__help text-secondary mb-0">
+              Adjust text size across the interface.
+            </p>
+          </div>
+
+          <div class="setting-item__control d-flex align-items-center" aria-describedby="font-size-help">
+            <span aria-hidden="true" style="font-size:14px;">A</span>
+            <input
+              type="range"
+              class="form-range mx-2"
+              id="fontSizeRange"
+              min="12"
+              max="20"
+              step="1"
+              [value]="currentFontSize"
+              (input)="onFontSizeChange($event)"
+              [attr.aria-valuemin]="12"
+              [attr.aria-valuemax]="20"
+              [attr.aria-valuenow]="currentFontSize"
+            />
+            <span aria-hidden="true" style="font-size:20px;">A</span>
+          </div>
+        </div>
+
+       
+        <div class="setting-item">
+          <div class="setting-item__meta">
+            <label class="setting-item__label" for="fontWeightRange">
+              Font Weight <span class="text-secondary">({{ currentFontWeight }})</span>
+            </label>
+            <p id="font-weight-help" class="setting-item__help text-secondary mb-0">
+              Choose a comfortable thickness for text.
+            </p>
+          </div>
+
+          <div class="setting-item__control d-flex align-items-center" aria-describedby="font-weight-help">
+            <span aria-hidden="true" style="font-weight:300;">A</span>
+            <input
+              type="range"
+              class="form-range mx-2"
+              id="fontWeightRange"
+              min="300"
+              max="900"
+              step="100"
+              [value]="currentFontWeight"
+              (input)="onFontWeightChange($event)"
+              [attr.aria-valuemin]="300"
+              [attr.aria-valuemax]="900"
+              [attr.aria-valuenow]="currentFontWeight"
+            />
+            <span aria-hidden="true" style="font-weight:900;">A</span>
+          </div>
+        </div>
+
+        <div class="col-12">
+      <div class="setting-card">
+        <h4 class="card-title"><i class="fas fa-mouse-pointer me-2"></i> Cursor</h4>
+        <div class="brdr mb-3"></div>
+
+        <div class="setting-item">
+          <label>Enable Custom Cursor</label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="cursorSwitch"
+                   [checked]="isCustomCursor"
+                   (change)="toggleCustomCursor($event)">
+            <label class="form-check-label" for="cursorSwitch">
+              @if(isCustomCursor) { Enabled } @else { Disabled }
+            </label>
+          </div>
+        </div>
+        
+        @if(isCustomCursor) {
+          <hr class="brdr">
+          <div class="setting-item">
+            <label for="cursor-size-slider">Cursor Size 
+              <span class="text-secondary">({{ currentCursorSize }}px)</span>
+            </label>
+            
+            <div class="d-flex align-items-center flex-grow-1 ms-4">
+              <input 
+                type="range"
+                class="form-range mx-2" 
+                id="cursor-size-slider"
+                min="16" max="64" step="2"
+                [value]="currentCursorSize"
+                (input)="onCursorSizeChange($event)">
+            </div>
+            
+            <button class="btn btn-outline-secondary btn-sm" (click)="resetCursor()">Reset</button>
+          </div>
+        }
+        
+      </div>
+    </div>
+      </div>
+    </section>
+
+    
+    <section class="col-12">
+      <div class="setting-card" aria-labelledby="card-appearance-title">
+        <h2 id="card-appearance-title" class="card-title h4">
+          <i class="fas fa-paint-brush me-2" aria-hidden="true"></i> Appearance
+        </h2>
+        <div class="brdr mb-3" aria-hidden="true"></div>
+
+        
+        <div class="setting-item">
+          <div class="setting-item__meta">
+            <span class="setting-item__label">Accent Color</span>
+            <p id="accent-help" class="setting-item__help text-secondary mb-0">
+              Pick a highlight color for buttons and links.
+            </p>
+          </div>
+
+          <div class="color-swatches" role="group" aria-labelledby="accent-help">
+            <button
+              type="button"
+              class="swatch blue"
+              [class.active]="currentBrandColor === 'blue'"
+              [attr.aria-pressed]="currentBrandColor === 'blue'"
+              aria-label="Set accent color to blue"
+              (click)="setBrandColor('blue')">
+              
+            </button>
+
+            <button
+              type="button"
+              class="swatch green"
+              [class.active]="currentBrandColor === 'green'"
+              [attr.aria-pressed]="currentBrandColor === 'green'"
+              aria-label="Set accent color to green"
+              (click)="setBrandColor('green')">
+              
+            </button>
+
+            <button
+              type="button"
+              class="swatch purple"
+              [class.active]="currentBrandColor === 'purple'"
+              [attr.aria-pressed]="currentBrandColor === 'purple'"
+              aria-label="Set accent color to purple"
+              (click)="setBrandColor('purple')">
+              
+            </button>
+          </div>
+        </div>
+
+        <hr class="brdr" aria-hidden="true" />
+
+        
+        <div class="setting-item">
+          <div class="setting-item__meta">
+            <label class="setting-item__label" for="glowSwitch">Animated Background Glow</label>
+            <p id="glow-help" class="setting-item__help text-secondary mb-0">
+              Subtle ambient glow behind content.
+            </p>
+          </div>
+
+          <div class="form-check form-switch">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="glowSwitch"
+              aria-describedby="glow-help glow-state"
+              [checked]="isGlowOn"
+              (change)="toggleGlow($event)"
+            />
+            <span id="glow-state" class="form-check-label">
+              @if(isGlowOn) { Enabled } @else { Disabled }
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

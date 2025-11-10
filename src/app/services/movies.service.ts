@@ -18,4 +18,7 @@ export class MoviesService {
   getSimilarMovie(mediaType:string, id:number):Observable<any> {
     return this._HttpClient.get(`https://api.themoviedb.org/3/${mediaType}/${id}/similar?api_key=b374522b484f342d39e68aae5bf69b6f&language=en-US&page=1`)
   }
+  getAllGeners(mediaType:'movie' | 'tv'):Observable<any> {
+    return this._HttpClient.get(`https://api.themoviedb.org/3/genre/${mediaType}/list?api_key=b374522b484f342d39e68aae5bf69b6f&language=en-US&page=1`)
+  }
 } 

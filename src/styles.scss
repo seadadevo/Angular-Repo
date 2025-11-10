@@ -11,23 +11,36 @@
   --glow-color-1: rgba(0, 123, 255, 0.1); 
   --glow-color-2: rgba(100, 100, 100, 0.1);
 
-  
+  --input-focus-bg: rgba(0, 123, 255, 0.1);
+  --cursor-size: 24px; 
+
+
   --light-bg: #007bff;
   --transparent-bg: rgba(0, 123, 255, 0.6);
 
   --font-size-base: 16px;
+  --font-weight: 300;
   --font-Color: #1a1a1a; 
   --second-FontColor: #6c757d;
 
  
-  --border-Color: #dee2e6; 
+  --border-Color: #b1bcc7; 
   --border-Height: 1px;
   --input-bg: #ffffff; 
   --input-focus-bg: rgba(0, 123, 255, 0.1);
+
+
+  --brand-color-blue: #007bff;
+  --brand-color-blue-t: rgba(0, 123, 255, 0.6);
+  --brand-color-green: #198754;
+  --brand-color-green-t: rgba(25, 135, 84, 0.6);
+  --brand-color-purple: #6f42c1;
+  --brand-color-purple-t: rgba(111, 66, 193, 0.6);
 }
 
 html {
   font-size: var(--font-size-base);
+  font-weight: var(--font-weight);
   transition: font-size 0.2s ease-in-out;
 }
 
@@ -52,6 +65,13 @@ body.dark-theme {
   --border-Color: #a8a8a83d;
   --input-bg: rgba(255, 255, 255, 0.05); 
   --input-focus-bg: rgba(36, 184, 239, 0.1);
+
+  --brand-color-blue: #24baef;
+  --brand-color-blue-t: rgba(36, 184, 239, 0.6);
+  --brand-color-green: #20c997;
+  --brand-color-green-t: rgba(32, 201, 151, 0.6);
+  --brand-color-purple: #8549f5;
+  --brand-color-purple-t: rgba(133, 73, 245, 0.6);
 }
 
 
@@ -60,6 +80,23 @@ body.dark-theme {
   background-color: var(--light-bg);
 }
 
+
+[data-brand-color="blue"] {
+  --light-bg: var(--brand-color-blue);
+  --transparent-bg: var(--brand-color-blue-t);
+}
+[data-brand-color="green"] {
+  --light-bg: var(--brand-color-green);
+  --transparent-bg: var(--brand-color-green-t);
+}
+[data-brand-color="purple"] {
+  --light-bg: var(--brand-color-purple);
+  --transparent-bg: var(--brand-color-purple-t);
+}
+
+html[data-cursor="on"] * {
+  cursor: none !important; 
+}
 
 body {
   background: linear-gradient(145deg,
@@ -96,6 +133,32 @@ body::before {
     );
   z-index: -1;
   animation: subtleGlow 10s ease-in-out infinite alternate;
+  display: block;
+}
+
+html[data-glow="off"] body::before {
+  display: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--cursor-size);
+  height: var(--cursor-size);
+  background-color: var(--light-bg); 
+  border-radius: 50%;
+  opacity: 0.7;
+  pointer-events: none; 
+  transform: translate(-50%, -50%); 
+  transition: width 0.1s, height 0.1s, background-color 0.3s;
+  z-index: 99999;
+  display: none;
+}
+
+
+html[data-cursor="on"] .custom-cursor {
+  display: block;
 }
 
 @keyframes subtleGlow {

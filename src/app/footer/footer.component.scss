@@ -1,5 +1,5 @@
 .footer {
-  background: linear-gradient(180deg, var(--bg-main) 0%, #0d1117 100%);
+  background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid), 100%);
   border-top: 1px solid var(--border-Color);
   color: var(--font-Color);
   font-family: 'Montserrat', sans-serif;
@@ -67,7 +67,7 @@
 
 .brand-highlight {
   color: var(--light-bg);
-  font-weight: 600;
+  font-weight: var(--font-weight);
 }
 
 

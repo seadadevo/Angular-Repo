@@ -9,6 +9,16 @@
       <div class="brdr w-25 mx-auto mt-3"></div>
     </div>
 
+    <div class="search-bar mb-5 text-center">
+      <input
+        type="text"
+        [(ngModel)]="term"
+        (input)="searchMovise()"
+        placeholder="Search for a Movies show..."
+        class="input-mine w-75 w-md-50"
+      />
+    </div>
+
   @if(isLoading) {
     <div class="text-center py-5">
       <div class="spinner-border text-info" role="status"></div>
@@ -18,7 +28,7 @@
 
   @if(!isLoading) {
     <div class="row g-4">
-      @for(item of movies; track $index){
+      @for(item of filteredShows; track $index){
         <div class="col-xl-3 col-lg-4 col-md-6">
           <app-mediaitem [item]="item"></app-mediaitem>
         </div>

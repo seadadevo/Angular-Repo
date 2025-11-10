@@ -1,0 +1,90 @@
+
+.setting-card {
+  background-color: var(--bg-gradient-mid);
+  border: 1px solid var(--border-Color);
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  height: 100%; 
+}
+
+.card-title {
+  color: var(--font-Color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+label {
+  color: var(--font-Color);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+
+.color-swatches {
+  display: flex;
+  gap: 0.75rem;
+
+  .swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 3px solid transparent; 
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+  
+    &.blue { background-color: var(--brand-color-blue); }
+    &.green { background-color: var(--brand-color-green); }
+    &.purple { background-color: var(--brand-color-purple); }
+
+   
+    &.active {
+      border-color: var(--font-Color); 
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+  }
+}
+
+
+.form-switch .form-check-input {
+  width: 3.5em;
+  height: 1.75em;
+  cursor: pointer;
+  
+  
+  &:checked {
+    background-color: var(--light-bg);
+    border-color: var(--light-bg);
+  }
+}
+
+
+.form-range {
+ 
+  &::-webkit-slider-thumb {
+    background-color: var(--light-bg);
+  }
+  &::-moz-range-thumb {
+    background-color: var(--light-bg);
+  }
+
+
+  &::-webkit-slider-runnable-track {
+    background-color: var(--border-Color);
+  }
+  &::-moz-range-track {
+    background-color: var(--border-Color);
+  }
+}

@@ -20,13 +20,13 @@
 
 .movie-details h2 {
   color: var(--font-Color);
-  font-weight: 700;
+  font-weight: calc(var(--font-weight) * 2);
   letter-spacing: 0.5px;
 }
 
 .movie-details small {
   color: var(--second-FontColor);
-  font-weight: 500;
+  font-weight: calc(var(--font-weight) * 2);
 }
 
 .badge {
@@ -65,7 +65,7 @@
 
 .desc span {
   color: var(--light-bg);
-  font-weight: 600;
+  font-weight: calc(var(--font-weight) * 2);
 }
 
 .border-top {
@@ -136,7 +136,7 @@
 
 .movie-overlay h3 {
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: calc(var(--font-weight) * 2);
   color: var(--font-Color);
 }
 

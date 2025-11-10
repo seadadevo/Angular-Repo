@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './profile/profile.component';
-import { PasswordComponent } from './password/password.component';
 import { PrivacyComponent } from './privacy/privacy.component';
+import { SettingComponent } from './setting/setting.component';
 
 const routes: Routes = [
-  {path: '', component:ProfileComponent},
-  {path: 'password', component:PasswordComponent},
+  {path: '', component:SettingComponent},
+  {path: 'profile', component:ProfileComponent},
   {path: 'privacy', component:PrivacyComponent},
 ];
 

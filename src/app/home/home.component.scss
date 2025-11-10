@@ -1,12 +1,12 @@
 :host {
   display: block;
-  background: transparent; /* خلي الخلفية شفافة علشان تظهر الجريدينت العام */
+  background: transparent; 
   color: var(--font-Color);
   min-height: 100vh;
   padding-bottom: 4rem;
 }
 
-/* 🌈 Search Input */
+
 input.form-control {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-Color);
@@ -22,7 +22,6 @@ input.form-control:focus {
   background-color: rgba(36, 186, 239, 0.08);
 }
 
-/* 🧩 Section Header */
 .section-header {
   display: flex;
   align-items: center;
@@ -31,10 +30,10 @@ input.form-control:focus {
 }
 
 .section-header h2 {
-  font-weight: 700;
+  font-weight: calc(var(--font-weight) * 2);
   font-size: 1.5rem;
   letter-spacing: 1px;
-  color: #fff;
+  color: var(--font-Color);
   border-left: 4px solid var(--light-bg);
   padding-left: 10px;
 }
@@ -43,7 +42,6 @@ input.form-control:focus {
   color: var(--second-FontColor) !important;
 }
 
-/* ✨ Scroll Styling */
 .scroll-section {
   scrollbar-width: thin;
   scrollbar-color: var(--light-bg) transparent;
@@ -63,7 +61,7 @@ input.form-control:focus {
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* 💫 Media Item Card Hover */
+
 app-mediaitem {
   display: block;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -75,7 +73,7 @@ app-mediaitem:hover {
   box-shadow: 0 12px 25px rgba(36, 184, 239, 0.25);
 }
 
-/* 🎬 Category Section Look */
+
 .category-section {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   padding: 2rem 0;
@@ -93,7 +91,7 @@ app-mediaitem:hover {
   background: linear-gradient(90deg, var(--light-bg), transparent);
 }
 
-/* 🎥 Subtle section animation */
+
 .category-section {
   animation: fadeInUp 0.8s ease both;
 }

@@ -8,23 +8,26 @@
   font-size: clamp(28px, 3.2vw, 40px);
   font-weight: 800;
   letter-spacing: .3px;
-  color: #e8f5ff;
+  color: var(--font-Color);
   line-height: 1.15;
 }
 
 .section-header h1 span {
-  color: #16d1ff;
+  color: var(--light-bg);
   text-shadow: 0 0 18px rgba(22, 209, 255, .25);
 }
 
 .section-header p {
   margin: 10px 0 0;
-  color: #8db9cc;
+  color: var(--second-FontColor);
   font-size: clamp(14px, 1.6vw, 16px);
 }
 
 
-.container .row.g-4 { --bs-gutter-x: 1.25rem; --bs-gutter-y: 1.25rem; }
+.container .row.g-4 { 
+  --bs-gutter-x: 1.25rem;
+  --bs-gutter-y: 1.25rem; 
+}
 
 
 .empty-state {
@@ -62,12 +65,12 @@
   margin: 8px 0 6px;
   font-size: 20px;
   font-weight: 700;
-  color: #d5ecf7;
+  color: var(--font-Color);
 }
 
 .empty-card p {
   margin: 0 0 16px;
-  color: #95b4c6;
+  color: var(--second-FontColor);
 }
 
 .empty-card .btn {
@@ -75,7 +78,7 @@
   border-radius: 10px;
   font-weight: 600;
   border: none;
-  background: #0ec5ff;
+  background: var(--light-bg);
   color: #04202b;
 }
 .empty-card .btn:hover { filter: brightness(1.08); }
