@@ -1,4 +1,3 @@
-// ملف: mediaitem.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
