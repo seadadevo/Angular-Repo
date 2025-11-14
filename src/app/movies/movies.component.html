@@ -90,9 +90,28 @@
           <hr class="my-3 opacity-50" />
 
          
-          <div class="mb-2 small text-secondary">
-            <i class="fas fa-info-circle me-1"></i> Add year, rating, language filters later.
-          </div>
+         <div class="mb-3">
+  <div class="d-flex align-items-center justify-content-between mb-2">
+    <label class="form-label text-secondary mb-0">Languages</label>
+    <button class="btn btn-sm btn-outline-light" (click)="showAllLangs()">Reset</button>
+  </div>
+
+  <div class="genres chips">
+    <!-- "All" chip -->
+    <button class="chip" (click)="showAllLangs()" [class.active]="selectedLang === null">All</button>
+
+    <!-- iterate over Set via Array.from -->
+    <button
+      *ngFor="let lang of languagesList"
+      class="chip"
+      (click)="filterByLanguage(lang)"
+      [class.active]="selectedLang === lang"
+      title="{{ lang }}"
+    >
+{{ languageNames[lang] || lang.toUpperCase() }}
+    </button>
+  </div>
+</div>
         </div>
       </aside>
 
