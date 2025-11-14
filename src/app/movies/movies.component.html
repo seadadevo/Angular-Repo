@@ -154,7 +154,7 @@
 
         @if(!isLoading) {
           <div class="row g-4">
-            @for (item of allShows; track (item.id + item.media_type)) {
+            @for (item of paginatedShows; track (item.id + item.media_type)) {
               <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                 
                 <div class="movie-card h-100">
@@ -198,10 +198,37 @@
               </div>
             }
           </div>
+
+          @if (getTotalPages() > 1) {
+            <nav aria-label="Page navigation" class="d-flex justify-content-center mt-5">
+              <ul class="pagination">
+                <li class="page-item" [class.disabled]="currentPage === 1">
+                  <a class="page-link" href="#" (click)="$event.preventDefault(); prevPage()">
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                </li>
+  
+                @for (page of getPageNumbers(); track page) {
+                  <li class="page-item" [class.active]="page === currentPage">
+                    <a class="page-link" href="#" (click)="$event.preventDefault(); goToPage(page)">
+                      {{ page }}
+                    </a>
+                  </li>
+                }
+  
+                <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                  <a class="page-link" href="#" (click)="$event.preventDefault(); nextPage()">
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          }
+
         } @else {
           <div class="py-5 text-center text-secondary">
             <i class="fas fa-spinner fa-spin me-2 fa-2x"></i>
-            <span class="fs-5">Loading...</span>
+            <span class="fs-5 align-middle">Loading...</span>
           </div>
         }
       </main>

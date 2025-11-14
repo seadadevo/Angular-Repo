@@ -22,59 +22,61 @@ import { RouterLink } from '@angular/router';
 })
 export class MoviesComponent implements OnInit {
 
+
   languageNames: Record<string, string> = {
-  en: 'English',
-  ar: 'Arabic',
-  fr: 'French',
-  es: 'Spanish',
-  de: 'German',
-  it: 'Italian',
-  ja: 'Japanese',
-  ko: 'Korean',
-  zh: 'Chinese',
-  hi: 'Hindi',
-  ru: 'Russian',
-  pt: 'Portuguese',
-  tr: 'Turkish',
-  nl: 'Dutch',
-  sv: 'Swedish',
-  no: 'Norwegian',
-  da: 'Danish',
-  fi: 'Finnish',
-  pl: 'Polish',
-  cs: 'Czech',
-  el: 'Greek',
-  he: 'Hebrew'
-};
+    en: 'English',
+    ar: 'Arabic',
+    fr: 'French',
+    es: 'Spanish',
+    de: 'German',
+    it: 'Italian',
+    ja: 'Japanese',
+    ko: 'Korean',
+    zh: 'Chinese',
+    hi: 'Hindi',
+    ru: 'Russian',
+    pt: 'Portuguese',
+    tr: 'Turkish',
+    nl: 'Dutch',
+    sv: 'Swedish',
+    no: 'Norwegian',
+    da: 'Danish',
+    fi: 'Finnish',
+    pl: 'Polish',
+    cs: 'Czech',
+    el: 'Greek',
+    he: 'Hebrew'
+  };
 
   currentView: 'all' | 'movie' | 'tv' = 'all';
   isSidebarOpen = false;
   isLoading = true;
 
+ 
   movies: any[] = [];
   tvShows: any[] = [];
 
+ 
   filteredMovies: any[] = [];
   filteredTv: any[] = [];
 
+
   allShows: any[] = [];
+  
+  paginatedShows: any[] = [];
 
-  // search term
   term: string = '';
-
   generes: any[] = [];
-
-  languageMovies: Set<string> = new Set();
-  languageTV: Set<string> = new Set();
   allLanguages: Set<string> = new Set();
-
   selectedGenre: number | null = null;
   selectedLang: string | null = null;
-
-
   minYear: number = 1970;
   maxYear: number = new Date().getFullYear();
-  selectedYear: number = 1970; 
+  selectedYear: number = 1970;
+
+  
+  currentPage: number = 1;
+  itemsPerPage: number = 8; 
   
   constructor(private _MoviesService: MoviesService) {}
 
@@ -88,6 +90,7 @@ export class MoviesComponent implements OnInit {
       tvGenres: this._MoviesService.getAllGeners('tv'),
     }).subscribe({
       next: (res) => {
+        
         this.movies = res.movies.results.map((m: any) => ({
           ...m,
           media_type: 'movie',
@@ -97,24 +100,20 @@ export class MoviesComponent implements OnInit {
           media_type: 'tv',
         }));
 
+        
         const allGenres = [...res.movieGenres.genres, ...res.tvGenres.genres];
         this.generes = allGenres.filter(
           (genre, index, self) =>
             index === self.findIndex((g) => g.id === genre.id)
         );
 
-        this.languageMovies = new Set(
-          this.movies.map((m) => m.original_language ?? '')
-        );
-        this.languageTV = new Set(
-          this.tvShows.map((t) => t.original_language ?? '')
-        );
+        
         this.allLanguages = new Set([
-          ...this.languageMovies,
-          ...this.languageTV,
-        ]);
+          ...this.movies.map((m) => m.original_language ?? ''),
+          ...this.tvShows.map((t) => t.original_language ?? '')
+        ].filter(Boolean));
 
-
+        
         const allDates = [...this.movies, ...this.tvShows]
           .map(item => item.release_date || item.first_air_date)
           .filter(Boolean);
@@ -123,10 +122,10 @@ export class MoviesComponent implements OnInit {
         if (validYears.length > 0) {
           this.minYear = Math.min(...validYears);
           this.maxYear = Math.max(...validYears);
-          this.selectedYear = this.minYear; 
+          this.selectedYear = this.minYear;
         }
 
-        
+       
         this._applyAllFilters();
         this.isLoading = false;
       },
@@ -137,17 +136,24 @@ export class MoviesComponent implements OnInit {
     });
   }
 
- 
+
+  
   private _applyAllFilters(): void {
     this.searchFilter();
+    
+   
     if (this.selectedGenre !== null) {
       this.genreFilter();
     }
     if (this.selectedLang !== null) {
       this.langFilter();
     }
-    this.yearFilter();
+    this.yearFilter(); 
+
     this.viewFilter();
+
+    this.currentPage = 1;
+    this.updatePaginatedView();
   }
 
 
@@ -181,15 +187,13 @@ export class MoviesComponent implements OnInit {
     if(this.selectedLang === null){
       return;
     }
-
-  this.filteredMovies = this.filteredMovies.filter(
-    (m) => (m.original_language || '').toLowerCase() === this.selectedLang!.toLowerCase()
-  );
-  this.filteredTv = this.filteredTv.filter(
-    (t) => (t.original_language || '').toLowerCase() === this.selectedLang!.toLowerCase()
-  );
+    this.filteredMovies = this.filteredMovies.filter(
+      (m) => (m.original_language || '').toLowerCase() === this.selectedLang!.toLowerCase()
+    );
+    this.filteredTv = this.filteredTv.filter(
+      (t) => (t.original_language || '').toLowerCase() === this.selectedLang!.toLowerCase()
+    );
   }
-
 
   yearFilter(): void {
     this.filteredMovies = this.filteredMovies.filter(m => {
@@ -215,14 +219,16 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-
+ 
   onSearchChange(): void {
     this._applyAllFilters();
   }
 
   displayShows(mediaType: 'all' | 'movie' | 'tv') {
     this.currentView = mediaType;
-    this.viewFilter();
+    this.viewFilter(); 
+    this.currentPage = 1; 
+    this.updatePaginatedView(); 
   }
 
   filterByGeneres(genreID: number): void {
@@ -240,7 +246,6 @@ export class MoviesComponent implements OnInit {
     this._applyAllFilters();
   }
 
-
   showAllGenres() {
     this.selectedGenre = null;
     this._applyAllFilters();
@@ -255,6 +260,54 @@ export class MoviesComponent implements OnInit {
     this.selectedYear = this.minYear;
     this._applyAllFilters();
   }
+
+
+  
+  updatePaginatedView(): void {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    const endIndex = startIndex + this.itemsPerPage;
+    this.paginatedShows = this.allShows.slice(startIndex, endIndex);
+  }
+
+
+  getTotalPages(): number {
+    return Math.ceil(this.allShows.length / this.itemsPerPage);
+  }
+
+ 
+  getPageNumbers(): number[] {
+    const totalPages = this.getTotalPages();
+    return Array.from({ length: totalPages }, (_, i) => i + 1);
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.getTotalPages()) {
+      return;
+    }
+    this.currentPage = page;
+    this.updatePaginatedView();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+
+  nextPage(): void {
+    if (this.currentPage < this.getTotalPages()) {
+      this.currentPage++;
+      this.updatePaginatedView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  
+  prevPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updatePaginatedView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+ 
 
   get languagesList(): string[] {
     return Array.from(this.allLanguages);
