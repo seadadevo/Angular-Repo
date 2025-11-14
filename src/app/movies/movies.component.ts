@@ -71,6 +71,11 @@ export class MoviesComponent implements OnInit {
   selectedGenre: number | null = null;
   selectedLang: string | null = null;
 
+
+  minYear: number = 1970;
+  maxYear: number = new Date().getFullYear();
+  selectedYear: number = 1970; 
+  
   constructor(private _MoviesService: MoviesService) {}
 
   ngOnInit(): void {
@@ -109,10 +114,20 @@ export class MoviesComponent implements OnInit {
           ...this.languageTV,
         ]);
 
-        this.searchFilter();
 
-        this.genreFilter();
-        this.viewFilter();
+        const allDates = [...this.movies, ...this.tvShows]
+          .map(item => item.release_date || item.first_air_date)
+          .filter(Boolean);
+        const validYears = allDates.map(d => new Date(d).getFullYear()).filter(y => !isNaN(y));
+
+        if (validYears.length > 0) {
+          this.minYear = Math.min(...validYears);
+          this.maxYear = Math.max(...validYears);
+          this.selectedYear = this.minYear; 
+        }
+
+        
+        this._applyAllFilters();
         this.isLoading = false;
       },
       error: (err) => {
@@ -121,6 +136,20 @@ export class MoviesComponent implements OnInit {
       },
     });
   }
+
+ 
+  private _applyAllFilters(): void {
+    this.searchFilter();
+    if (this.selectedGenre !== null) {
+      this.genreFilter();
+    }
+    if (this.selectedLang !== null) {
+      this.langFilter();
+    }
+    this.yearFilter();
+    this.viewFilter();
+  }
+
 
   searchFilter(): void {
     const q = this.term.trim().toLowerCase();
@@ -138,10 +167,6 @@ export class MoviesComponent implements OnInit {
   }
 
   genreFilter(): void {
-    if (this.selectedGenre === null) {
-      return;
-    }
-
     this.filteredMovies = this.filteredMovies.filter(
       (m) =>
         Array.isArray(m.genre_ids) && m.genre_ids.includes(this.selectedGenre!)
@@ -163,8 +188,22 @@ export class MoviesComponent implements OnInit {
   this.filteredTv = this.filteredTv.filter(
     (t) => (t.original_language || '').toLowerCase() === this.selectedLang!.toLowerCase()
   );
-
   }
+
+
+  yearFilter(): void {
+    this.filteredMovies = this.filteredMovies.filter(m => {
+      const itemDate = m.release_date || m.first_air_date;
+      const itemYear = itemDate ? new Date(itemDate).getFullYear() : 0;
+      return itemYear === 0 || itemYear >= this.selectedYear;
+    });
+    this.filteredTv = this.filteredTv.filter(t => {
+      const itemDate = t.release_date || t.first_air_date;
+      const itemYear = itemDate ? new Date(itemDate).getFullYear() : 0;
+      return itemYear === 0 || itemYear >= this.selectedYear;
+    });
+  }
+
 
   viewFilter(): void {
     if (this.currentView === 'movie') {
@@ -176,62 +215,50 @@ export class MoviesComponent implements OnInit {
     }
   }
 
+
   onSearchChange(): void {
-    this.searchFilter();
-
-    if (this.selectedGenre !== null) {
-      this.genreFilter();
-    }
-    if (this.selectedLang !== null) {
-      this.langFilter();
-    }
-
-    this.viewFilter();
+    this._applyAllFilters();
   }
 
   displayShows(mediaType: 'all' | 'movie' | 'tv') {
     this.currentView = mediaType;
-
     this.viewFilter();
   }
 
   filterByGeneres(genreID: number): void {
     this.selectedGenre = this.selectedGenre === genreID ? null : genreID;
-    this.searchFilter();
-    if (this.selectedGenre !== null) {
-      this.genreFilter();
-    }
-    this.viewFilter();
+    this._applyAllFilters();
   }
+
   filterByLanguage(lang: string): void {
     this.selectedLang = this.selectedLang === lang ? null : lang
-    this.searchFilter();
-    if (this.selectedGenre !== null) {
-    this.genreFilter();
+    this._applyAllFilters();
   }
-    if (this.selectedLang !== null) {
-    this.langFilter();
+
+  onYearChange(event: any): void {
+    this.selectedYear = Number(event.target.value);
+    this._applyAllFilters();
   }
-    this.viewFilter();
-  }
+
 
   showAllGenres() {
     this.selectedGenre = null;
-    this.searchFilter();
-    this.viewFilter();
+    this._applyAllFilters();
   }
+  
   showAllLangs() {
     this.selectedLang = null;
-    this.searchFilter();
-    if (this.selectedGenre !== null) {
-    this.genreFilter();
+    this._applyAllFilters();
   }
-    this.viewFilter();
+
+  resetYear() {
+    this.selectedYear = this.minYear;
+    this._applyAllFilters();
   }
 
   get languagesList(): string[] {
-  return Array.from(this.allLanguages);
-}
+    return Array.from(this.allLanguages);
+  }
   toggleSidebar(): void {
     this.isSidebarOpen = !this.isSidebarOpen;
   }

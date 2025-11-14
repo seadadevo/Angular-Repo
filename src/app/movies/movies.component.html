@@ -1,7 +1,6 @@
 <section class="movies py-4">
   <div class="movies__layout container-fluid">
 
-
     <div class="movies__topbar d-lg-none px-3 mb-3">
       <button class="btn btn-outline-info me-2" (click)="toggleSidebar()" aria-label="Toggle filters sidebar">
         <i class="fas fa-sliders-h"></i>
@@ -16,7 +15,7 @@
     </div>
 
     <div class="row gx-4">
-     
+      
       <aside class="movies__sidebar col-12 col-lg-3" [class.is-open]="isSidebarOpen" (click)="closeSidebar()" aria-label="Filters sidebar">
         <div class="sidebar__panel" (click)="$event.stopPropagation()">
           <div class="sidebar__header d-flex align-items-center justify-content-between mb-3">
@@ -26,7 +25,6 @@
             </button>
           </div>
 
-        
           <div class="btn-group w-100 mb-3" role="group" aria-label="View switch">
             <button
               type="button"
@@ -57,7 +55,6 @@
             </button>
           </div>
 
-         
           <div class="mb-3 d-none d-lg-block">
             <label class="form-label text-secondary">Search</label>
             <div class="position-relative">
@@ -72,7 +69,6 @@
             </div>
           </div>
 
-       
           <div class="mb-2">
             <div class="d-flex align-items-center justify-content-between mb-2">
               <label class="form-label text-secondary mb-0">Genres</label>
@@ -80,51 +76,77 @@
             </div>
 
             <div class="genres chips">
-              <button class="chip" (click)="showAllGenres()">All</button>
+              <button class="chip" (click)="showAllGenres()" [class.active]="selectedGenre === null">All</button>
               @for (genere of generes; track genere.id) {
-                <button class="chip" (click)="filterByGeneres(genere.id)">{{ genere.name }}</button>
+                <button 
+                  class="chip" 
+                  (click)="filterByGeneres(genere.id)"
+                  [class.active]="selectedGenre === genere.id">
+                  {{ genere.name }}
+                </button>
               }
             </div>
           </div>
 
           <hr class="my-3 opacity-50" />
+          
+          <div class="mb-3">
+           <div class="d-flex align-items-center justify-content-between mb-2">
+             <label class="form-label text-secondary mb-0">Languages</label>
+             <button class="btn btn-sm btn-outline-light" (click)="showAllLangs()">Reset</button>
+           </div>
+           <div class="genres chips">
+             <button class="chip" (click)="showAllLangs()" [class.active]="selectedLang === null">All</button>
+             @for (lang of languagesList; track lang) {
+              <button
+                class="chip"
+                (click)="filterByLanguage(lang)"
+                [class.active]="selectedLang === lang"
+                title="{{ lang }}"
+              >
+                {{ languageNames[lang] || lang.toUpperCase() }}
+              </button>
+             }
+           </div>
+         </div>
+         <hr class="my-3 opacity-50" />
 
-         
-         <div class="mb-3">
-  <div class="d-flex align-items-center justify-content-between mb-2">
-    <label class="form-label text-secondary mb-0">Languages</label>
-    <button class="btn btn-sm btn-outline-light" (click)="showAllLangs()">Reset</button>
-  </div>
+         <div class="mb-2">
+           <div class="d-flex align-items-center justify-content-between mb-2">
+             <label for="year-slider" class="form-label text-secondary mb-0">
+               Minimum Year: <span class="text-white fw-bold">{{ selectedYear }}</span>
+             </label>
+             <button class="btn btn-sm btn-outline-light" (click)="resetYear()">Reset</button>
+           </div>
+           <input 
+             type="range"
+             class="form-range" 
+             id="year-slider"
+             [min]="minYear"
+             [max]="maxYear"
+             step="1"
+             [value]="selectedYear"
+             (input)="onYearChange($event)"
+           >
+           <div class="d-flex justify-content-between small text-secondary px-1">
+             <span>{{ minYear }}</span>
+             <span>{{ maxYear }}</span>
+           </div>
+         </div>
+         <hr class="my-3 opacity-50" />
 
-  <div class="genres chips">
-    <!-- "All" chip -->
-    <button class="chip" (click)="showAllLangs()" [class.active]="selectedLang === null">All</button>
-
-    <!-- iterate over Set via Array.from -->
-    <button
-      *ngFor="let lang of languagesList"
-      class="chip"
-      (click)="filterByLanguage(lang)"
-      [class.active]="selectedLang === lang"
-      title="{{ lang }}"
-    >
-{{ languageNames[lang] || lang.toUpperCase() }}
-    </button>
-  </div>
-</div>
-        </div>
+       </div>
       </aside>
 
-      
       <main class="movies__content col-12 col-lg-9">
-       
+        
         <div class="movies__toolbar d-none d-lg-flex align-items-center justify-content-between mb-3">
           <div class="d-flex gap-2 align-items-center">
             <span class="badge bg-info bg-opacity-25 text-info">
               <i class="fas fa-layer-group me-1"></i>
               @if (currentView === 'all') { All } @else if (currentView === 'movie') { Movies } @else { TV }
             </span>
-          </div>
+            </div>
           <div class="text-secondary small">
             @if(!isLoading){ {{ allShows.length || 0 }} results }
           </div>
@@ -132,19 +154,23 @@
 
         @if(!isLoading) {
           <div class="row g-4">
-            @for (item of allShows; track item.id) {
+            @for (item of allShows; track (item.id + item.media_type)) {
               <div class="col-12 col-sm-6 col-md-4 col-xl-3">
-              
+                
                 <div class="movie-card h-100">
                   <div class="poster">
                     <img [src]="'https://image.tmdb.org/t/p/w500' + item.poster_path" [alt]="item.title || item.name" loading="lazy" />
                     <div class="badge-stack">
-                      <span class="badge badge--vote" *ngIf="item.vote_average">
-                        <i class="fas fa-star"></i> {{ item.vote_average | number:'1.1-1' }}
-                      </span>
-                      <span class="badge badge--type" *ngIf="item.media_type || currentView !== 'all'">
-                        {{ item.media_type || currentView }}
-                      </span>
+                      @if (item.vote_average) {
+                        <span class="badge badge--vote">
+                          <i class="fas fa-star"></i> {{ item.vote_average | number:'1.1-1' }}
+                        </span>
+                      }
+                      @if (item.media_type || currentView !== 'all') {
+                        <span class="badge badge--type">
+                          {{ item.media_type || currentView }}
+                        </span>
+                      }
                     </div>
                   </div>
 
@@ -154,11 +180,11 @@
                     </h4>
                     <div class="d-flex align-items-center gap-2 text-secondary small">
                       <i class="far fa-calendar-alt"></i>
-                      <span>{{ item.release_date || item.first_air_date || '—' }}</span>
+                      <span>{{ (item.release_date || item.first_air_date | date: 'MMM yyyy') || '—' }}</span>
                     </div>
                   </div>
 
-                 
+                  
                   <div class="p-3 pt-0">
                     <a [routerLink]="['/moviedetails', item.id, item.media_type]" class="btn btn-sm btn-outline-info w-100">
                       <i class="fas fa-circle-info me-1"></i> Details
@@ -174,7 +200,8 @@
           </div>
         } @else {
           <div class="py-5 text-center text-secondary">
-            <i class="fas fa-spinner fa-spin me-2"></i> Loading...
+            <i class="fas fa-spinner fa-spin me-2 fa-2x"></i>
+            <span class="fs-5">Loading...</span>
           </div>
         }
       </main>
