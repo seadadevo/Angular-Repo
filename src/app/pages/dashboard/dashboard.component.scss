@@ -1,0 +1,17 @@
+.theme-box {
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  
+  // ده عشان يبان الخلفية وتتأكد ان الثيم شغال
+  &.green { background-color: #e8f5e9; }
+  &.red { background-color: #ffebee; }
+  &.blue { background-color: #e3f2fd; }
+}
+
+.buttons-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

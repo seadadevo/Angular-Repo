@@ -1,13 +1,11 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { ProductsComponent } from './products/products.component';
-import { SettingsComponent } from './settings/settings.component';
-import { PagesComponent } from './pages/pages.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+
+
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'dashboard', pathMatch: "full"},
-    {path: 'dashboard',  component: DashboardComponent },
-    {path: 'products',  component: ProductsComponent},
-    {path: 'settings',  component: SettingsComponent},
-    {path: 'pages',  component: PagesComponent},
+    {path: '',
+        loadChildren: ()=>import('./pages/pages.routes').then(p => p.routes)},
+    
+        { path: '**', component: PageNotFoundComponent }
 ];
