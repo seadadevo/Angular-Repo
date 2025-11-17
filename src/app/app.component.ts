@@ -7,16 +7,13 @@ import { PagesComponent } from './pages/pages.component';
 
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [
-
-    RouterOutlet,
-   
-    PagesComponent,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+    selector: 'app-root',
+    imports: [
+        RouterOutlet,
+        PagesComponent,
+    ],
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss'
 })
 export class AppComponent {
   data = {

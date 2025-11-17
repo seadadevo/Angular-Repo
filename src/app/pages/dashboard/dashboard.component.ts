@@ -16,12 +16,10 @@ const THUMBUP_ICON =
 
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [MatButtonModule,MatDividerModule,  MatIconModule],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
-  
+    selector: 'app-dashboard',
+    imports: [MatButtonModule, MatDividerModule, MatIconModule],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
   

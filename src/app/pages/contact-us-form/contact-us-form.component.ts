@@ -2,11 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-contact-us-form',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './contact-us-form.component.html',
-  styleUrl: './contact-us-form.component.scss'
+    selector: 'app-contact-us-form',
+    imports: [ReactiveFormsModule],
+    templateUrl: './contact-us-form.component.html',
+    styleUrl: './contact-us-form.component.scss'
 })
 export class ContactUsFormComponent {
   form: FormGroup;

@@ -7,11 +7,10 @@ import { LoaderService } from '../services/loader.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-pages',
-  standalone: true,
-  imports: [RouterOutlet, FormsModule, RouterLink],
-  templateUrl: './pages.component.html',
-  styleUrl: './pages.component.scss'
+    selector: 'app-pages',
+    imports: [RouterOutlet, FormsModule, RouterLink],
+    templateUrl: './pages.component.html',
+    styleUrl: './pages.component.scss'
 })
 export class PagesComponent {
    breadcrumb = 'Dashboard'; // default fallback

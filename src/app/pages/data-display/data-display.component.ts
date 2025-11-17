@@ -28,11 +28,10 @@ const PRODUCT_DATA: Product[] = [
 ];
 
 @Component({
-  selector: 'app-data-display',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './data-display.component.html',
-  styleUrl: './data-display.component.scss'
+    selector: 'app-data-display',
+    imports: [CommonModule],
+    templateUrl: './data-display.component.html',
+    styleUrl: './data-display.component.scss'
 })
 export class DataDisplayComponent {
 
