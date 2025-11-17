@@ -3,6 +3,7 @@ import {MatButtonModule} from '@angular/material/button'
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import {MatDividerModule} from '@angular/material/divider';
+import { ThemeService } from '../../services/theme.service';
 const THUMBUP_ICON =
   `
   <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px">
@@ -23,9 +24,20 @@ const THUMBUP_ICON =
   
 })
 export class DashboardComponent {
-  constructor() {
+  
+  constructor(public theme: ThemeService) {
     const iconRegistry = inject(MatIconRegistry);
     const sanitizer = inject(DomSanitizer);
     iconRegistry.addSvgIconLiteral('thumbs-up', sanitizer.bypassSecurityTrustHtml(THUMBUP_ICON));
+  }
+
+  setGreen() { this.theme.setColor('green'); }
+  setRed() { this.theme.setColor('red'); }
+  setBlue() { this.theme.setColor('blue'); }
+
+
+  toggleMode() {
+    const newMode = this.theme.mode() === 'light' ? 'dark' : 'light';
+    this.theme.setMode(newMode);
   }
 }

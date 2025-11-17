@@ -13,7 +13,11 @@ export class ThemeService {
   public color = signal<'green' | 'red' | 'blue'>('green');
 
   //public currentTheme = computed(() => `${this.mode()}-${this.color()}`)
-  public currentTheme = computed(() => this.color());
+  
+  public currentTheme = computed(() => {
+  // النتيجة هتكون مثلاً: 'green-light' أو 'green-dark'
+  return `${this.color()}-${this.mode()}`; 
+});
 
   constructor() {
 

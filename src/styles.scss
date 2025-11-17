@@ -1,50 +1,90 @@
-@import url('https://cdn.jsdelivr.net/npm/@angular/material@16/prebuilt-themes/indigo-pink.css');
-// @use '@angular/material' as mat;
+// @import url('https://cdn.jsdelivr.net/npm/@angular/material@16/prebuilt-themes/indigo-pink.css');
+@use '@angular/material' as mat;
 
-// // 2. استدعاء الثيم الأساسي (core) مرة واحدة فقط
-// @include mat.core();
+@include mat.core();
 
-// // 3. تعريف باليتات الألوان (زي ما في ThemeService)
-// // Green Theme
-// $theme-green-primary: mat.define-palette(mat.$green-palette);
-// $theme-green-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-// $theme-green: mat.define-light-theme((
-//   color: (
-//     primary: $theme-green-primary,
-//     accent: $theme-green-accent,
-//   )
-// ));
+// ==============================
+// 1. تعريف الباليتات (الألوان)
+// ==============================
+$my-primary-green: mat.define-palette(mat.$green-palette);
+$my-primary-red:   mat.define-palette(mat.$red-palette);
+$my-primary-blue:  mat.define-palette(mat.$blue-palette);
 
-// // Red Theme
-// $theme-red-primary: mat.define-palette(mat.$red-palette);
-// $theme-red-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-// $theme-red: mat.define-light-theme((
-//   color: (
-//     primary: $theme-red-primary,
-//     accent: $theme-red-accent,
-//   )
-// ));
+$my-accent:        mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$my-warn:          mat.define-palette(mat.$red-palette);
 
-// // Blue Theme
-// $theme-blue-primary: mat.define-palette(mat.$blue-palette);
-// $theme-blue-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-// $theme-blue: mat.define-light-theme((
-//   color: (
-//     primary: $theme-blue-primary,
-//     accent: $theme-blue-accent,
-//   )
-// ));
+// ==============================
+// 2. تكوين الثيمات (Light & Dark)
+// ==============================
 
-// // 4. تطبيق الثيمات بناءً على الكلاس الموجود في الـ HTML
-// // (الـ ThemeService بتاعك هو اللي بيحط الكلاسات دي)
-// .green {
-//   @include mat.all-component-themes($theme-green);
-// }
+// --- Green Themes ---
+$green-light-theme: mat.define-light-theme((
+  color: (primary: $my-primary-green, accent: $my-accent, warn: $my-warn)
+));
 
-// .red {
-//   @include mat.all-component-themes($theme-red);
-// }
+$green-dark-theme: mat.define-dark-theme((
+  color: (primary: $my-primary-green, accent: $my-accent, warn: $my-warn)
+));
 
-// .blue {
-//   @include mat.all-component-themes($theme-blue);
-// }
+// --- Red Themes ---
+$red-light-theme: mat.define-light-theme((
+  color: (primary: $my-primary-red, accent: $my-accent, warn: $my-warn)
+));
+
+$red-dark-theme: mat.define-dark-theme((
+  color: (primary: $my-primary-red, accent: $my-accent, warn: $my-warn)
+));
+
+// --- Blue Themes ---
+$blue-light-theme: mat.define-light-theme((
+  color: (primary: $my-primary-blue, accent: $my-accent, warn: $my-warn)
+));
+
+$blue-dark-theme: mat.define-dark-theme((
+  color: (primary: $my-primary-blue, accent: $my-accent, warn: $my-warn)
+));
+
+
+// ==============================
+// 3. إنشاء الكلاسات وتطبيق الخلفية
+// ==============================
+
+// دالة مساعدة عشان تكرار الكود (Mixin)
+@mixin apply-theme($theme, $bg-color, $text-color) {
+  // 1. تطبيق ثيم الماتيريال (للأزرار والانبوتس.. الخ)
+  @include mat.all-component-themes($theme);
+  
+  // 2. تطبيق لون الخلفية والنص للصفحة كلها
+  background-color: $bg-color;
+  color: $text-color;
+}
+
+// --- Green Classes ---
+.green-light {
+  @include apply-theme($green-light-theme, #e8f5e9, #000000); // خلفية فاتحة ونص أسود
+}
+
+.green-dark {
+  @include apply-theme($green-dark-theme, #1b2e20, #ffffff); // خلفية غامقة جداً ونص أبيض
+}
+
+// --- Red Classes ---
+.red-light {
+  @include apply-theme($red-light-theme, #ffebee, #000000);
+}
+
+.red-dark {
+  @include apply-theme($red-dark-theme, #3e1313, #ffffff);
+}
+
+// --- Blue Classes ---
+.blue-light {
+  @include apply-theme($blue-light-theme, #e3f2fd, #000000);
+}
+
+.blue-dark {
+  @include apply-theme($blue-dark-theme, #0d2538, #ffffff);
+}
+
+// تنسيقات عامة عشان الصفحة تملا الشاشة
+html, body { height: 100%; margin: 0; }
